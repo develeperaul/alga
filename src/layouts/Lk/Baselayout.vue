@@ -7,7 +7,7 @@
     <!-- <HeaderBase /> -->
 
     <q-header class="tw-py-3-1">
-      <div class="tw-container">
+      <div class="env-t tw-container">
         <div class="tw-flex tw-justify-between tw-items-center">
           <img
             :src="require('assets/images/logo-v3.svg')"
@@ -160,9 +160,9 @@
     <q-page-container class="tw-grid content">
       <router-view class="" />
     </q-page-container>
-    <q-footer v-if="!$q.screen.xl" class="tw-pt-5 tw-pb-2.5 app-page-bg">
+    <q-footer v-if="!$q.screen.xl" class="env-b tw-pt-5 tw-pb-2.5 app-page-bg">
       <div class="tw-container">
-        <ul class="tw-flex tw-justify-around">
+        <ul class=" tw-grid tw-grid-cols-4">
           <router-link
             :to="{ name: 'index-directive' }"
             custom
@@ -253,6 +253,27 @@
               </span>
             </li>
           </router-link>
+
+          <router-link
+            :to="{ name: 'profile' }"
+            custom
+            v-slot="{ isExactActive, navigate }"
+          >
+            <li
+              class="nav-links__item item tw-flex tw-flex-col tw-items-center"
+              @click="navigate"
+              :class="{ active: isExactActive }"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" width="40"
+                height="40" viewBox="0 0 24 24" fill="#363B72"><g><g><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM7.35 18.5C8.66 17.56 10.26 17 12 17s3.34.56 4.65 1.5c-1.31.94-2.91 1.5-4.65 1.5s-3.34-.56-4.65-1.5zm10.79-1.38C16.45 15.8 14.32 15 12 15s-4.45.8-6.14 2.12C4.7 15.73 4 13.95 4 12c0-4.42 3.58-8 8-8s8 3.58 8 8c0 1.95-.7 3.73-1.86 5.12z"/><path d="M12 6c-1.93 0-3.5 1.57-3.5 3.5S10.07 13 12 13s3.5-1.57 3.5-3.5S13.93 6 12 6zm0 5c-.83 0-1.5-.67-1.5-1.5S11.17 8 12 8s1.5.67 1.5 1.5S12.83 11 12 11z"/></g></g></svg>
+
+              <span class="item__text tw-text-xxs-1" @click="navigate">
+                {{ t("nav[3]") }}
+              </span>
+            </li>
+          </router-link>
+
+          
         </ul>
       </div>
     </q-footer>
@@ -270,7 +291,7 @@ const i18n = {
   messages: {
     "ru-RU": {
       nav: ["Деривативы", "Портфолио",
-      'История'
+      'История', "Профиль"
       //  "История", "Поддержка", "Рефералы"
       ],
       "log-out": "Выйти",
@@ -281,7 +302,8 @@ const i18n = {
       nav: [
         "Index Derivatives",
         "My Portfolio",
-        "History"
+        "History",
+        "Profile",
         // "History",
         // "Support",
         // "Referrals",

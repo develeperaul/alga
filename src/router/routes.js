@@ -3,25 +3,25 @@ import { markAuth } from "./utilities/auth";
 // layouts/V4/Baselayout.vue
 // layouts/GuestLayout.vue
 const routes = [
-  {
-    path: "/",
-    component: () => import("layouts/Landing/BaseLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("pages/Landing.vue"),
-        name: "home",
-      },
-      {
-        path: "/about",
-        component: () => import("pages/About.vue"),
-        name: "about",
-      }
-    ],
-  },
+  // {
+  //   path: "/",
+  //   component: () => import("layouts/Landing/BaseLayout.vue"),
+  //   children: [
+  //     {
+  //       path: "",
+  //       component: () => import("pages/Landing.vue"),
+  //       name: "home",
+  //     },
+  //     {
+  //       path: "/about",
+  //       component: () => import("pages/About.vue"),
+  //       name: "about",
+  //     }
+  //   ],
+  // },
 
   {
-    path: "/lk",
+    path: "/",
     component: () => import("layouts/Lk/Baselayout.vue"),
     children: [
       ...markAuth(
@@ -41,7 +41,7 @@ const routes = [
           name: "history",
         },
         {
-          path: "portfolio",
+          path: "",
           component: () => import("pages/Lk/Portfolio.vue"),
           name: "portfolio",
         },
