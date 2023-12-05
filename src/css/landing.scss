@@ -1,0 +1,156 @@
+.landing-page-y {
+  padding-top: 0px;
+}
+
+.landing-h-center {
+  @apply tw-flex tw-flex-col tw-justify-center;
+}
+
+.landing-h-between {
+  @apply tw-flex tw-flex-col tw-justify-between;
+}
+
+.landing-eco-right {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  padding: 15px 18px;
+  flex-basis: 170px;
+  height: 360px;
+  @apply tw-inline-flex tw-flex-wrap tw-flex-col tw-items-center tw-justify-between;
+  // @include gutter(18px);
+}
+
+.landing-c-up {
+  @include screen-xl {
+    transform: translateY(-25px);
+  }
+}
+
+.landing-h2 {
+  letter-spacing: 0.2em;
+  @apply tw-text-xs tw-text-secondary;
+
+  &--space {
+    top: 40px;
+    @apply tw-absolute tw-left-0;
+  }
+}
+
+.landing-icon-cover {
+  width: 48px;
+  height: 48px;
+  line-height: 48px;
+  @apply tw-text-center tw-bg-dark tw-bg-opacity-10 tw-rounded-full;
+  margin: 9px;
+
+  &:hover {
+    @apply tw-bg-opacity-30;
+  }
+
+  &--active {
+    @apply tw-bg-opacity-30;
+  }
+}
+
+.anim-bg {
+  content: "";
+  display: block;
+  width: 2338px;
+  height: 2338px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50%;
+  z-index: -1;
+
+  &__dark-blue {
+    background: linear-gradient(
+      98.99deg,
+      #0a1e3e 0.72%,
+      #213960 56.32%,
+      #0a1e3e 101.43%
+    );
+  }
+
+  &__blue {
+    background: linear-gradient(
+      149.13deg,
+      #0a1e3e 0.09%,
+      #045093 55.25%,
+      #0a1e3e 100%
+    );
+  }
+
+  &__orange {
+    background: linear-gradient(
+      150.99deg,
+      #0a1e3e 0.09%,
+      #ee5322 52.68%,
+      #0a1e3e 95.36%
+    );
+  }
+
+  &__purple {
+    background: linear-gradient(
+      149.13deg,
+      #0a1e3e 0.09%,
+      #9d1f60 55.25%,
+      #0a1e3e 100%
+    );
+  }
+
+  &__green {
+    background: linear-gradient(
+      149.13deg,
+      #0a1e3e 0.09%,
+      #04562c 55.25%,
+      #0a1e3e 100%
+    );
+  }
+
+  &__red {
+    background: linear-gradient(
+      149.13deg,
+      #0a1e3e 0.09%,
+      #9e1e26 55.25%,
+      #0a1e3e 100%
+    );
+  }
+
+  &__indigo {
+    background: linear-gradient(
+      149.13deg,
+      #0a1e3e 0.09%,
+      #3c26c9 55.25%,
+      #0a1e3e 100%
+    );
+  }
+
+  &__biruze {
+    background: linear-gradient(
+      149.13deg,
+      #0a1e3e 0.09%,
+      #0e5b74 55.25%,
+      #0a1e3e 100%
+    );
+  }
+
+  &__light-green {
+    background: linear-gradient(
+      149.13deg,
+      #a0e09c 18.3%,
+      #0cb65f 55.25%,
+      #a0e09c 100%
+    );
+  }
+
+  &__yellow {
+    background: linear-gradient(
+      149.13deg,
+      #0a1e3e 0.09%,
+      #f79226 55.25%,
+      #0a1e3e 100%
+    );
+  }
+}
