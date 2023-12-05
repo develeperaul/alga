@@ -501,7 +501,7 @@ Our approach involves the integration and creation of advanced indices by includ
         anyquestion: {
           title: "Any questions?",
           text: "If you have any questions, please contact us at , and an operator will get back with you as soon as possible",
-          contacrusButton: "Contast us",
+          contacrusButton: "Contact us",
           joinButton: "Join our community",
         },
       },
