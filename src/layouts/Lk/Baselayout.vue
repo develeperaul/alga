@@ -300,7 +300,7 @@ const i18n = {
     },
     "en-US": {
       nav: [
-        "Index Derivatives",
+        "Derivatives",
         "My Portfolio",
         "History",
         "Profile",
