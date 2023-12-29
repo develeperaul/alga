@@ -103,6 +103,7 @@
         class="bg-transparent"
         height="100%"
         :padding="false"
+        
       >
         <q-carousel-slide
           v-for="derivative in derivatives"
@@ -112,21 +113,29 @@
           <div
             class="tw-mb-7.5 xl:tw-mb-10 index-directive tw-grid xl:tw-flex tw-items-center tw-gap-8"
           >
-            <div style="width: 170px" class=" tw-justify-items-center tw-mx-auto">
-              <RoundDiagram
-                class="inside__round"
-                :values="roundDiagramData(derivative['currency_shares'])"
-                :colors="roundDiagramColors(derivative['currency_shares'])"
-              >
-                <template #image>
-                  <image
-                    x="180"
-                    y="180"
-                    width="140"
-                    :xlink:href="derivative.image.url"
-                  />
-                </template>
-              </RoundDiagram>
+            <div class=" tw-flex tw-items-center">
+              <q-btn round @click="prev">
+                <q-icon name="arrow_back_ios"/>
+              </q-btn>
+              <div style="width: 170px" class=" tw-justify-items-center tw-mx-auto">
+                <RoundDiagram
+                  class="inside__round"
+                  :values="roundDiagramData(derivative['currency_shares'])"
+                  :colors="roundDiagramColors(derivative['currency_shares'])"
+                >
+                  <template #image>
+                    <image
+                      x="180"
+                      y="180"
+                      width="140"
+                      :xlink:href="derivative.image.url"
+                    />
+                  </template>
+                </RoundDiagram>
+              </div>
+              <q-btn round @click="next">
+                <q-icon name="arrow_forward_ios"/>
+              </q-btn>
             </div>
             
               
@@ -476,6 +485,9 @@ export default {
   setup() {
     const slide= ref(1)
     const store = useStore();
+    const carousel= ref()
+    const next = ()=> carousel.value.next()
+    const prev = ()=> carousel.value.previos()
     const { charts, getChart } = useChart();
     const {
       btnMainData,
@@ -553,7 +565,11 @@ export default {
       targetList,
       typeDirevative,
       typesDirevative,
-      selectTypeDirevatives
+      selectTypeDirevatives,
+
+      carousel,
+      next,
+      prev
     };
   },
   methods: {

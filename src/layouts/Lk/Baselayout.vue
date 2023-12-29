@@ -114,11 +114,9 @@
             </div>
           
           <div class="desk-n tw-flex tw-items-center tw-gap-4">
-            <Locale />
-            <div>
-              <button class="burger" @click="dropDown = !dropDown">
-                <span></span><span></span><span></span>
-              </button>
+            
+            <div class="profile-name">
+              {{ $store.getters["profile/name"] }}
             </div>
           </div>
         </div>
@@ -391,5 +389,10 @@ export default {
     //   color: #8285ac;
     // }
   }
+}
+
+.profile-name {
+  background: #333653;
+  @apply tw-px-4 tw-py-2 tw-text-white tw-rounded-xl;
 }
 </style>

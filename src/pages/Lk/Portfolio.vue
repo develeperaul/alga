@@ -330,49 +330,7 @@
         </div>
       </div>
       <div class="xl:tw-w-1/2">
-        <div class="chart-card tw-mb-8" v-if="charts.length > 0">
-          <div class="btns btns_sm">
-            <!-- <button
-              class="tw-px-4 tw-h-full"
-              :class="{ active: activeChart === 1 }"
-              @click="newTime(2) activeChart = 1"
-            >
-              H
-            </button> -->
-            <button
-              class="tw-px-4 tw-h-full"
-              :class="{ active: activeChart === 2 }"
-              @click="newTime(2, 2)"
-            >
-              D
-            </button>
-            <button
-              class="tw-px-4 tw-h-full"
-              :class="{ active: activeChart === 3 }"
-              @click="newTime(3, 7)"
-            >
-              W
-            </button>
-            <button
-              class="tw-px-4 tw-h-full"
-              :class="{ active: activeChart === 4 }"
-              @click="newTime(4, 30)"
-            >
-              M
-            </button>
-            <button
-              class="tw-px-4 tw-h-full"
-              :class="{ active: activeChart === 5 }"
-              @click="newTime(5, 120)"
-            >
-              Y
-            </button>
-          </div>
-          <AreaChart
-            :valSeries="getChartData(1)"
-            class="tw-order-2 xl:tw-order-1"
-          />
-        </div>
+        
         <Swap :derivatives="derivatives" />
       </div>
     </div>

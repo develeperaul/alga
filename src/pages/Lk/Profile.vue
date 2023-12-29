@@ -130,7 +130,7 @@
           </div>
         </Form>
       </div>
-      <base-button @click.prevent="$app.logout"  class=" tw-mt-5"> {{ t("exit") }}</base-button>
+      <base-button @click.prevent="$app.logout"  class=" tw-w-full tw-mt-5"> {{ t("exit") }}</base-button>
     </div>
   </section>
   </q-page>
@@ -166,7 +166,7 @@ const i18n = {
       "change-password": "Change Password",
       "change-phone": "Change Phone",
       "phone-title": "New Phone Number",
-      exit:'Exit',
+      exit:'Logout',
       phone: {
         label: "Phone number",
       },

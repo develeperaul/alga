@@ -6,6 +6,10 @@
 import { defineComponent } from "vue";
 import { useMeta } from "quasar";
 import { useI18n } from "vue-i18n";
+import { SplashScreen } from '@capacitor/splash-screen';
+
+
+
 const i18n = {
   messages: {
     "ru-RU": {
@@ -26,47 +30,7 @@ export default defineComponent({
   name: "App",
   setup() {
     const { t } = useI18n(i18n);
-    useMeta({
-      title: "Alga Ecosystem - Financial Derivatives Platform",
-      description: "",
-      meta: {
-        // { name: "url", content: "https://alga.finance/" },
-        url: {
-          name: "url",
-          content: "https://alga.finance/",
-        },
-        ogImageWidth: {
-          name: "og:image:width",
-          content: "1920",
-        },
-        ogImageHeight: {
-          name: "og:image:height",
-          content: "1080",
-        },
-        title: {
-          property: "og:title",
-          // optional; similar to titleTemplate, but allows templating with other meta properties
-          template() {
-            return "title";
-          },
-        },
-        ogDescription: {
-          property: "og:description",
-          // optional; similar to titleTemplate, but allows templating with other meta properties
-          template() {
-            return t("meta.og:desctrition");
-          },
-        },
-        ogImage: {
-          property: "og:image",
-          content: "https://alga.finance/header-bg_en.jpg",
-        },
-        twitterImage: {
-          name: "twitter:image",
-          content: "https://alga.finance/header-bg_en.jpg",
-        },
-      },
-    });
+    onMounted(async()=>await SplashScreen.hide())
   },
 });
 </script>
