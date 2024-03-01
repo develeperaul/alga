@@ -514,14 +514,15 @@ export default {
       if(typeDirevative.value === 'Market'){
         const newArr = arr.filter(item => {
           if (
-            item.id !== 1 ||
-            item.id !== 2 ||
-            item.id !== 3 ||
-            item.id !== 4 ||
-            item.id !== 5 ||
-            item.id !== 15 ||
-            item.id !== 16 ||
-            item.id !== 17 ) return item
+            item.id === 1 ||
+            item.id === 2 ||
+            item.id === 3 ||
+            item.id === 4 ||
+            item.id === 5 ||
+            item.id === 15 ||
+            item.id === 16 ||
+            item.id === 17) return 
+            return item
         })
         // slide.value = newArr[0].id;
         return newArr
