@@ -832,8 +832,29 @@ export default {
     const store = useStore();
     const derivatives = computed(() => {
       const arr = store.getters["landing/derivatives"]
-      if(typeDirevative.value === 'ALGA') return arr.slice(0,5)
-      if(typeDirevative.value === 'Market')return arr.slice(5)
+      if(typeDirevative.value === 'ALGA') return arr.filter(item => {
+        if (
+          item.id === 1 ||
+          item.id === 2 ||
+          item.id === 3 ||
+          item.id === 4 ||
+          item.id === 5 ||
+          item.id === 15 ||
+          item.id === 16 ||
+          item.id === 17 ) return item
+        })
+        if (typeDirevative.value === 'Market') return arr.filter(item => {
+         if (
+          item.id === 1 ||
+          item.id === 2 ||
+          item.id === 3 ||
+          item.id === 4 ||
+          item.id === 5 ||
+          item.id === 15 ||
+          item.id === 16 ||
+           item.id === 17) return
+          return item
+        })
       
     });
     

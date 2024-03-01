@@ -7,7 +7,7 @@
       <div class=" tw-overflow-auto">
         
         <h4 class="tw-px-9 tw-py-8" >{{ t("titleSidebar") }}:</h4>
-        <div class=" tw-grid tw-gap-6">
+        <div class=" tw-grid tw-mb-4">
 
           <div v-for="item in typesDirevative" class=" accordion" :class="{active:typeDirevative === item }" @click="selectTypeDirevatives(item)" >
             <button class=" accordion__head">
@@ -496,13 +496,34 @@ export default {
     const derivatives = computed(() => {
       const arr = store.getters["landing/derivatives"]
       if(typeDirevative.value === 'ALGA') {
-        const newArr = arr.slice(0,5)
+        const newArr = arr.filter(item => {
+          if (
+            item.id === 1 ||
+            item.id === 2 ||
+            item.id === 3 ||
+            item.id === 4 ||
+            item.id === 5 ||
+            item.id === 15 ||
+            item.id === 16 ||
+            item.id === 17 ) return item
+        })
         // slide.value = newArr[0].id;
         return newArr
       }
 
       if(typeDirevative.value === 'Market'){
-        const newArr = arr.slice(5)
+        const newArr = arr.filter(item => {
+          if (
+            item.id === 1 ||
+            item.id === 2 ||
+            item.id === 3 ||
+            item.id === 4 ||
+            item.id === 5 ||
+            item.id === 15 ||
+            item.id === 16 ||
+            item.id === 17) return 
+            return item
+        })
         // slide.value = newArr[0].id;
         return newArr
       }
