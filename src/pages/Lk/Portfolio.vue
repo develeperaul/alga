@@ -132,7 +132,7 @@
             </span>
           </div>
         </div>
-
+        
         <div class="" v-if="indexList?.length > 0">
           <h4 class="tw-mb-5">{{ t("index-title") }}</h4>
         </div>
@@ -373,7 +373,7 @@
             class="tw-order-2 xl:tw-order-1"
           />
         </div>
-        <Swap :derivatives="derivatives" />
+        <Swap :derivatives="derivatives" :currentList="indexList" />
       </div>
     </div>
     <!-- popup -->

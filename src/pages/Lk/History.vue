@@ -74,6 +74,10 @@
             </div>
             <div>
               <div v-if="list.invoice">{{ list.invoice.coin.value }}</div>
+              <div
+               v-else>
+               -
+              </div>
             </div>
             <!-- <div v-if="list.invoice">
             <div>{{ (+list.invoice.declared_amount).toFixed(2) }}</div>
@@ -88,7 +92,8 @@
               </div>
             </div>
             <div>
-              <div v-if="list.invoice">{{ list.invoice.status.title }}</div>
+              <div v-if="list.status">{{ list.status.title }}</div>
+              
             </div>
           </div>
         </div>
