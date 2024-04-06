@@ -5,25 +5,25 @@
   >
     <div class=" tw-hidden xl:tw-grid xl:tw-content-between tw-grid-rows-1_auto tw-pb-5">
       <div class=" tw-overflow-auto">
-        
+
         <h4 class="tw-px-9 tw-py-8" >{{ t("titleSidebar") }}:</h4>
         <div class=" tw-grid tw-mb-4">
 
           <div v-for="item in typesDirevative" class=" accordion" :class="{active:typeDirevative === item }" @click="selectTypeDirevatives(item)" >
             <button class=" accordion__head">
               <span>
-    
+
                 {{item}}
               </span>
               <svg class="icon" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1.10638L6 5.89362L11 1.10638" stroke="white" stroke-width="0.967046" stroke-linecap="round"/>
               </svg>
-    
+
             </button>
-            
+
             <div v-if="charts.length > 0" class="accordion__body">
               <div class="child">
-    
+
                 <button
                   class="item-chart"
                   v-for="derivative in derivatives"
@@ -43,7 +43,7 @@
                       </h4>
                     </div>
                   </div>
-        
+
                   <div v-if="getChart(derivative.id)" class="tw-justify-self-end">
                     <div>
                       <!-- <MiniAreaChart
@@ -51,7 +51,7 @@
                         width="68"
                         height="34"
                       /> -->
-        
+
                       <button
                         @click="stage2"
                         class="tw-mt-2 tw-flex tw-gap-1.5 tw-items-center"
@@ -83,7 +83,7 @@
           {{ t("indexderivatives.title") }}
         </h2>
       </div>
-      
+
       <div class=" tw-flex xl:tw-hidden tw-justify-center xl:tw-gap-5 tw-gap-3 tw-mb-5">
           <base-button
                 v-for="item in typesDirevative"
@@ -94,7 +94,7 @@
               {{ item }}
               </base-button>
       </div>
-      
+
       <q-carousel
         swipeable
         animated
@@ -128,8 +128,8 @@
                 </template>
               </RoundDiagram>
             </div>
-            
-              
+
+
             <div class="tw-flex-grow">
               <div class="item tw-mb-5 tw-flex tw-justify-between">
                 <div class="tw-flex tw-gap-10 tw-items-center">
@@ -151,7 +151,7 @@
                   class="button  tw-w-full tw-hidden xl:tw-block xl:tw-w-auto"
                   >{{ t("buy") }}</base-button
                 >
-                
+
               </div>
               <base-button
                   data-index
@@ -187,7 +187,7 @@
                     <span></span>
                     <span> cost </span>
                     <span> alteration </span>
-                    
+
                   </div>
                 </div>
                 <ul class="table-body coinlist">
@@ -208,7 +208,7 @@
                     </div>
                     <span>{{ currency["percent_share"] }}%</span>
                     <span>{{ currency["percent_share"] }}%</span>
-                    
+
                   </li>
                 </ul>
               </div>
@@ -251,7 +251,7 @@
           </div>
         </q-carousel-slide>
       </q-carousel>
-      
+
       <Transition
         appear
         mode="out-in"
@@ -360,7 +360,7 @@ const i18n = {
     },
     "ru-RU": {
       buy: "Купить",
-      titleSidebar: 'Диревативы',
+      titleSidebar: 'Деривативы',
       indexderivatives: {
         title: "Индексные деривативы",
         time: "с {from} по {to}",
@@ -521,7 +521,7 @@ export default {
             item.id === 5 ||
             item.id === 15 ||
             item.id === 16 ||
-            item.id === 17) return 
+            item.id === 17) return
             return item
         })
         // slide.value = newArr[0].id;
@@ -547,16 +547,16 @@ export default {
 
       if( targetList.value === target) return targetList.value = ''
       targetList.value = target
-      
+
     }
     const selectTypeDirevatives = (type)=>{
       typeDirevative.value= type
     }
-    
+
     const typeDirevative = ref('ALGA')
     const typesDirevative = ['ALGA', 'Market']
     return {
-      
+
       t,
       slide,
       derivatives,
@@ -623,7 +623,7 @@ export default {
     display: grid;
     grid-template-columns: 257px 1fr;
   }
-  
+
   .item-chart {
     @apply tw-grid tw-grid-cols-2  tw-px-9 tw-py-3.5 tw-w-full;
     &:hover,
@@ -671,7 +671,7 @@ export default {
         gap: 0;
         align-items:center;
       }
-      
+
       .head-items {
         display: grid;
         grid-template-columns: 1fr 0.5fr 0.5fr ;

@@ -112,12 +112,7 @@
                 :mark="balance.is_profit_positive ? 1 : -1"
                 class="tw-w-2"
               />
-              ${{
-                (
-                  (+balance.relative_profit * 100) /
-                  +balance.actual_balance
-                ).toFixed(2)
-              }}
+              ${{ (+balance.relative_profit).toFixed(2) }}
             </span>
             <span
               class="tw-text-xxs"
@@ -128,11 +123,16 @@
               ]"
               v-if="balance.relative_profit"
               >{{ balance.is_profit_positive ? "+" : "-" }}
-              {{ (+balance.relative_profit).toFixed(2) }}%
+              {{
+                (
+                  (+balance.relative_profit * 100) /
+                  +balance.actual_balance
+                ).toFixed(2)
+              }}%
             </span>
           </div>
         </div>
-        
+
         <div class="" v-if="indexList?.length > 0">
           <h4 class="tw-mb-5">{{ t("index-title") }}</h4>
         </div>
