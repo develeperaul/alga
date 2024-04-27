@@ -330,8 +330,7 @@
         </div>
       </div>
       <div class="xl:tw-w-1/2">
-        
-        <Swap :derivatives="derivatives" />
+        <Swap :derivatives="derivatives" :currentList="indexList" />
       </div>
     </div>
     <!-- popup -->

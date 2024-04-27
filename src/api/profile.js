@@ -48,6 +48,13 @@ export function listPortfolio() {
   return MainApi.swot("b2c/portfolio/grouped-purchased-orders").json();
 }
 
+export function swap(obj) {
+  console.log(obj);
+  return MainApi.swot
+    .post("b2c/portfolio/swap-inders", { json: { ...obj } })
+    .json();
+}
+
 export function widthdrawalIndex(obj) {
   return MainApi.swot
     .post("b2c/portfolio/withdrawals", { json: { ...obj } })
