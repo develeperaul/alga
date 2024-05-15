@@ -78,7 +78,9 @@
             animated
             navigation
             padding
+            keep-alive
             class="bg-transparent"
+            :key="typeDirevative"
           >
             <template
               v-slot:navigation-icon="{ index, active, btnProps, onClick }"
@@ -96,9 +98,9 @@
             </template>
 
             <q-carousel-slide
-              v-for="derivative in derivatives"
+              v-for="(derivative, index) in derivatives"
               :key="derivative.id"
-              :name="derivative.id"
+              :name="index"
               class="column no-wrap flex-center"
             >
               <div class="card card_border card-derivative">
@@ -153,7 +155,7 @@
   </section>
 </template>
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useStore } from "vuex";
 import useChart from "src/composition/useChart.js";
 import { useI18n } from "vue-i18n";
@@ -832,17 +834,13 @@ export default {
     const { t } = useI18n(i18n);
     const store = useStore();
     const derivativesSlider = ref(null);
-    const slideIndex = ref(1);
+    const slideIndex = ref(0);
+    const typeDirevative = ref("ALGA");
+    const typesDirevative = ["ALGA", "Market", "Fund", "Kols"];
     const derivatives = computed(() => {
-      slideIndex.value = 1;
-      if (derivativesSlider.value) derivativesSlider.value.next();
-      return getDerivatives(typeDirevative.value);
-    });
-
-    const getDerivatives = (typeD) => {
       const arr = store.getters["landing/derivatives"];
 
-      if (typeD === "ALGA")
+      if (typeDirevative.value === "ALGA")
         return arr.filter((item) => {
           if (
             item.id === 1 ||
@@ -856,7 +854,7 @@ export default {
           )
             return item;
         });
-      if (typeD === "Market")
+      if (typeDirevative.value === "Market")
         return arr.filter((item) => {
           if (
             item.id === 1 ||
@@ -876,19 +874,23 @@ export default {
           return item;
         });
 
-      if (typeD === "Fund")
+      if (typeDirevative.value === "Fund")
         return arr.filter((item) => {
-          if (item.id === 19 || item.id === 20) return item;
+          if (item.id === 18 || item.id === 19 || item.id === 20) return item;
         });
 
-      if (typeD === "Kols")
+      if (typeDirevative.value === "Kols")
         return arr.filter((item) => {
           if (item.id === 21 || item.id === 22) return item;
         });
-    };
+    });
 
-    const typeDirevative = ref("ALGA");
-    const typesDirevative = ["ALGA", "Market", "Fund", "Kols"];
+    watch(typeDirevative, (val) => {
+      derivativesSlider.value?.goTo(0);
+
+      console.log(derivativesSlider);
+    });
+
     const getChart = (id) => {
       if (props.charts) {
         return props.charts.find(

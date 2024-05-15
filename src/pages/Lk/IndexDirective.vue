@@ -510,12 +510,8 @@ export default {
     const typeDirevative = ref("ALGA");
     const typesDirevative = ["ALGA", "Market", "Fund", "Kols"];
     const derivatives = computed(() => {
-      return getDerivatives(typeDirevative.value);
-    });
-
-    const getDerivatives = (typeD) => {
       const arr = store.getters["landing/derivatives"];
-      if (typeD === "ALGA")
+      if (typeDirevative.value === "ALGA")
         return arr.filter((item) => {
           if (
             item.id === 1 ||
@@ -529,7 +525,7 @@ export default {
           )
             return item;
         });
-      if (typeD === "Market")
+      if (typeDirevative.value === "Market")
         return arr.filter((item) => {
           if (
             item.id === 1 ||
@@ -549,16 +545,16 @@ export default {
           return item;
         });
 
-      if (typeD === "Fund")
+      if (typeDirevative.value === "Fund")
         return arr.filter((item) => {
-          if (item.id === 19 || item.id === 20) return item;
+          if (item.id === 18 || item.id === 19 || item.id === 20) return item;
         });
 
-      if (typeD === "Kols")
+      if (typeDirevative.value === "Kols")
         return arr.filter((item) => {
           if (item.id === 21 || item.id === 22) return item;
         });
-    };
+    });
 
     watch(
       () => derivatives.value,
