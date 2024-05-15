@@ -1,29 +1,41 @@
 <template>
   <!-- slider -->
-  <div
-    class="tw-container tw-px-0 content-page "
-  >
-    <div class=" tw-hidden xl:tw-grid xl:tw-content-between tw-grid-rows-1_auto tw-pb-5">
-      <div class=" tw-overflow-auto">
-
-        <h4 class="tw-px-9 tw-py-8" >{{ t("titleSidebar") }}:</h4>
-        <div class=" tw-grid tw-mb-4">
-
-          <div v-for="item in typesDirevative" class=" accordion" :class="{active:typeDirevative === item }" @click="selectTypeDirevatives(item)" >
-            <button class=" accordion__head">
+  <div class="tw-container tw-px-0 content-page">
+    <div
+      class="tw-hidden xl:tw-grid xl:tw-content-between tw-grid-rows-1_auto tw-pb-5"
+    >
+      <div class="tw-overflow-auto">
+        <h4 class="tw-px-9 tw-py-8">{{ t("titleSidebar") }}:</h4>
+        <div class="tw-grid tw-mb-4">
+          <div
+            v-for="item in typesDirevative"
+            class="accordion"
+            :class="{ active: typeDirevative === item }"
+            @click="selectTypeDirevatives(item)"
+          >
+            <button class="accordion__head">
               <span>
-
-                {{item}}
+                {{ item }}
               </span>
-              <svg class="icon" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1.10638L6 5.89362L11 1.10638" stroke="white" stroke-width="0.967046" stroke-linecap="round"/>
+              <svg
+                class="icon"
+                width="12"
+                height="7"
+                viewBox="0 0 12 7"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 1.10638L6 5.89362L11 1.10638"
+                  stroke="white"
+                  stroke-width="0.967046"
+                  stroke-linecap="round"
+                />
               </svg>
-
             </button>
 
             <div v-if="charts.length > 0" class="accordion__body">
               <div class="child">
-
                 <button
                   class="item-chart"
                   v-for="derivative in derivatives"
@@ -32,7 +44,9 @@
                   @click="slide = derivative.id"
                 >
                   <div class="tw-flex tw-flex-col tw-justify-between tw-h-full">
-                    <h4 class="tw-text-sm tw-text-left">{{ derivative.name }}</h4>
+                    <h4 class="tw-text-sm tw-text-left">
+                      {{ derivative.name }}
+                    </h4>
                     <div class="tw-flex tw-gap-x-2.5">
                       <MarkIcon
                         class="tw-w-4 tw-h-4"
@@ -44,7 +58,10 @@
                     </div>
                   </div>
 
-                  <div v-if="getChart(derivative.id)" class="tw-justify-self-end">
+                  <div
+                    v-if="getChart(derivative.id)"
+                    class="tw-justify-self-end"
+                  >
                     <div>
                       <!-- <MiniAreaChart
                         :values="getChartData(derivative.id)"
@@ -66,10 +83,9 @@
             </div>
           </div>
         </div>
-
       </div>
-      <div class=" tw-text-xxs tw-text-title tw-text-center">
-        © 2021-2023 ALGA. <br>
+      <div class="tw-text-xxs tw-text-title tw-text-center">
+        © 2021-2023 ALGA. <br />
         All Rights Reserved
       </div>
     </div>
@@ -84,15 +100,17 @@
         </h2>
       </div>
 
-      <div class=" tw-flex xl:tw-hidden tw-justify-center xl:tw-gap-5 tw-gap-3 tw-mb-5">
-          <base-button
-                v-for="item in typesDirevative"
-                class="button button__dense "
-                :design="typeDirevative === item ? 'green': 'border'"
-                @click="selectTypeDirevatives(item)"
-              >
-              {{ item }}
-              </base-button>
+      <div
+        class="tw-flex xl:tw-hidden tw-justify-center xl:tw-gap-5 tw-gap-3 tw-mb-5"
+      >
+        <base-button
+          v-for="item in typesDirevative"
+          class="button button__dense"
+          :design="typeDirevative === item ? 'green' : 'border'"
+          @click="selectTypeDirevatives(item)"
+        >
+          {{ item }}
+        </base-button>
       </div>
 
       <q-carousel
@@ -112,7 +130,10 @@
           <div
             class="tw-mb-7.5 xl:tw-mb-10 index-directive tw-grid xl:tw-flex tw-items-center tw-gap-8"
           >
-            <div style="width: 170px" class=" tw-justify-items-center tw-mx-auto">
+            <div
+              style="width: 170px"
+              class="tw-justify-items-center tw-mx-auto"
+            >
               <RoundDiagram
                 class="inside__round"
                 :values="roundDiagramData(derivative['currency_shares'])"
@@ -128,7 +149,6 @@
                 </template>
               </RoundDiagram>
             </div>
-
 
             <div class="tw-flex-grow">
               <div class="item tw-mb-5 tw-flex tw-justify-between">
@@ -148,17 +168,16 @@
                 <base-button
                   data-index
                   @click="stage2($event, derivative.id)"
-                  class="button  tw-w-full tw-hidden xl:tw-block xl:tw-w-auto"
+                  class="button tw-w-full tw-hidden xl:tw-block xl:tw-w-auto"
                   >{{ t("buy") }}</base-button
                 >
-
               </div>
               <base-button
-                  data-index
-                  @click="stage2($event, derivative.id)"
-                  class="button tw-mb-4  tw-w-full xl:tw-hidden xl:tw-w-auto"
-                  >{{ t("buy") }}</base-button
-                >
+                data-index
+                @click="stage2($event, derivative.id)"
+                class="button tw-mb-4 tw-w-full xl:tw-hidden xl:tw-w-auto"
+                >{{ t("buy") }}</base-button
+              >
               <p class="text">
                 {{ derivative.description }}
               </p>
@@ -183,11 +202,10 @@
                   <h4 class="">
                     {{ t("inside.title") }}
                   </h4>
-                  <div class=" head-items">
+                  <div class="head-items">
                     <span></span>
                     <span> cost </span>
                     <span> alteration </span>
-
                   </div>
                 </div>
                 <ul class="table-body coinlist">
@@ -202,13 +220,12 @@
                         alt="bitcoin"
                         width="30"
                         height="30"
-                        class=" tw-rounded-full"
+                        class="tw-rounded-full"
                       />
                       <span>{{ currency.name }}</span>
                     </div>
                     <span>{{ currency["percent_share"] }}%</span>
                     <span>{{ currency["percent_share"] }}%</span>
-
                   </li>
                 </ul>
               </div>
@@ -298,9 +315,7 @@
               >{{ t("popup.request") }}</base-button
             >
           </Form>
-          <p class="tw-mt-5 tw-text-xxs">
-            *{{ t("popup.text") }}
-          </p>
+          <p class="tw-mt-5 tw-text-xxs">*{{ t("popup.text") }}</p>
         </div>
       </Transition>
     </div>
@@ -322,7 +337,7 @@ const i18n = {
   messages: {
     "en-US": {
       buy: "Buy",
-      titleSidebar: 'Derivatives',
+      titleSidebar: "Derivatives",
       indexderivatives: {
         title: "Index Derivatives",
         time: "from {from} to {to}",
@@ -353,14 +368,14 @@ const i18n = {
           label: "Wallet number",
         },
         request: "Leave a request",
-        text:`After clicking the button, pay, you will be redirected to the gateway.
+        text: `After clicking the button, pay, you will be redirected to the gateway.
              If nothing opens, please check your pop-up blocker.
-             browser windows`
+             browser windows`,
       },
     },
     "ru-RU": {
       buy: "Купить",
-      titleSidebar: 'Деривативы',
+      titleSidebar: "Деривативы",
       indexderivatives: {
         title: "Индексные деривативы",
         time: "с {from} по {to}",
@@ -393,7 +408,7 @@ const i18n = {
         request: "К оплате",
         text: `После нажатия кнопки, оплатить, вы будете перенаправлены на шлюз.
             Если ничего не открылось, просим проверить блокировку всплывающих
-            окон браузера`
+            окон браузера`,
       },
     },
     de: {
@@ -474,7 +489,7 @@ export default {
     MiniAreaChart,
   },
   setup() {
-    const slide= ref(1)
+    const slide = ref(1);
     const store = useStore();
     const { charts, getChart } = useChart();
     const {
@@ -492,43 +507,63 @@ export default {
     const { popup, isPopup, popupContent, buy, popupAction } =
       useBuyWidthdrawalPopup();
     const { t } = useI18n(i18n);
-
+    const typeDirevative = ref("ALGA");
+    const typesDirevative = ["ALGA", "Market", "Fund", "Kols"];
     const derivatives = computed(() => {
-      const arr = store.getters["landing/derivatives"]
-      if(typeDirevative.value === 'ALGA') {
-        const newArr = arr.filter(item => {
-          if (
-            item.id === 1 ||
-            item.id === 2 ||
-            item.id === 3 ||
-            item.id === 4 ||
-            item.id === 5 ||
-            item.id === 15 ||
-            item.id === 16 ||
-            item.id === 17 ) return item
-        })
-        // slide.value = newArr[0].id;
-        return newArr
-      }
-
-      if(typeDirevative.value === 'Market'){
-        const newArr = arr.filter(item => {
-          if (
-            item.id === 1 ||
-            item.id === 2 ||
-            item.id === 3 ||
-            item.id === 4 ||
-            item.id === 5 ||
-            item.id === 15 ||
-            item.id === 16 ||
-            item.id === 17) return
-            return item
-        })
-        // slide.value = newArr[0].id;
-        return newArr
-      }
+      return getDerivatives(typeDirevative.value);
     });
-    watch(()=>derivatives.value,(val)=> setTimeout(()=>slide.value = val[0].id,0) )
+
+    const getDerivatives = (typeD) => {
+      const arr = store.getters["landing/derivatives"];
+      if (typeD === "ALGA")
+        return arr.filter((item) => {
+          if (
+            item.id === 1 ||
+            item.id === 2 ||
+            item.id === 3 ||
+            item.id === 4 ||
+            item.id === 5 ||
+            item.id === 15 ||
+            item.id === 16 ||
+            item.id === 17
+          )
+            return item;
+        });
+      if (typeD === "Market")
+        return arr.filter((item) => {
+          if (
+            item.id === 1 ||
+            item.id === 2 ||
+            item.id === 3 ||
+            item.id === 4 ||
+            item.id === 5 ||
+            item.id === 15 ||
+            item.id === 16 ||
+            item.id === 17 ||
+            item.id === 19 ||
+            item.id === 20 ||
+            item.id === 21 ||
+            item.id === 22
+          )
+            return;
+          return item;
+        });
+
+      if (typeD === "Fund")
+        return arr.filter((item) => {
+          if (item.id === 19 || item.id === 20) return item;
+        });
+
+      if (typeD === "Kols")
+        return arr.filter((item) => {
+          if (item.id === 21 || item.id === 22) return item;
+        });
+    };
+
+    watch(
+      () => derivatives.value,
+      (val) => setTimeout(() => (slide.value = val[0].id), 0)
+    );
     const roundDiagramData = (currencys) => {
       return currencys.map((item) => +item["percent_share"]);
     };
@@ -542,21 +577,16 @@ export default {
         +item.value,
       ]);
     };
-    const targetList = ref('')
-    const openList = (target)=>{
+    const targetList = ref("");
+    const openList = (target) => {
+      if (targetList.value === target) return (targetList.value = "");
+      targetList.value = target;
+    };
+    const selectTypeDirevatives = (type) => {
+      typeDirevative.value = type;
+    };
 
-      if( targetList.value === target) return targetList.value = ''
-      targetList.value = target
-
-    }
-    const selectTypeDirevatives = (type)=>{
-      typeDirevative.value= type
-    }
-
-    const typeDirevative = ref('ALGA')
-    const typesDirevative = ['ALGA', 'Market']
     return {
-
       t,
       slide,
       derivatives,
@@ -574,7 +604,7 @@ export default {
       targetList,
       typeDirevative,
       typesDirevative,
-      selectTypeDirevatives
+      selectTypeDirevatives,
     };
   },
   methods: {
@@ -592,7 +622,7 @@ export default {
 .accordion {
   &__head {
     @apply tw-flex tw-items-center tw-justify-between  tw-px-9 tw-py-3.5 tw-w-full;
-    background: #262D34;
+    background: #262d34;
   }
   &__body {
     @apply tw-grid  tw-overflow-hidden tw-my-0;
@@ -603,10 +633,10 @@ export default {
     }
   }
   .icon {
-    @apply  tw-transition-transform tw-duration-300 tw-ease-out;
+    @apply tw-transition-transform tw-duration-300 tw-ease-out;
   }
   &.active &__head {
-    background: #0A8F2D;
+    background: #0a8f2d;
   }
   &.active .icon {
     @apply tw-transform tw-rotate-180;
@@ -619,7 +649,6 @@ export default {
 }
 .content-page {
   @screen xl {
-
     display: grid;
     grid-template-columns: 257px 1fr;
   }
@@ -669,17 +698,17 @@ export default {
         padding: 10px 77px 10px 18px;
         display: flex;
         gap: 0;
-        align-items:center;
+        align-items: center;
       }
 
       .head-items {
         display: grid;
-        grid-template-columns: 1fr 0.5fr 0.5fr ;
+        grid-template-columns: 1fr 0.5fr 0.5fr;
         margin-top: 10px;
         @screen xl {
           margin-top: 0px;
-          flex-grow:1;
-          grid-template-columns: 0.5fr 0.5fr 0.5fr ;
+          flex-grow: 1;
+          grid-template-columns: 0.5fr 0.5fr 0.5fr;
         }
       }
       & *:first-child {
@@ -695,12 +724,11 @@ export default {
       .item {
         padding: 10px 18px 10px 18px;
         @screen xl {
-
           padding: 10px 77px 10px 18px;
         }
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr 0.5fr 0.5fr ;
+        grid-template-columns: 1fr 0.5fr 0.5fr;
         &:not(:last-child) {
           @apply tw-border-b tw-border-gray-border;
         }
