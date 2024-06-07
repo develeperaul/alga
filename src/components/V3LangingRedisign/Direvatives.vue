@@ -836,7 +836,7 @@ export default {
     const derivativesSlider = ref(null);
     const slideIndex = ref(0);
     const typeDirevative = ref("ALGA");
-    const typesDirevative = ["ALGA", "Market", "Fund", "Kols"];
+    const typesDirevative = ["ALGA", "Market", "Fund", "KOL’s"];
     const derivatives = computed(() => {
       const arr = store.getters["landing/derivatives"];
 
@@ -865,6 +865,7 @@ export default {
             item.id === 15 ||
             item.id === 16 ||
             item.id === 17 ||
+            item.id === 18 ||
             item.id === 19 ||
             item.id === 20 ||
             item.id === 21 ||
@@ -879,7 +880,7 @@ export default {
           if (item.id === 18 || item.id === 19 || item.id === 20) return item;
         });
 
-      if (typeDirevative.value === "Kols")
+      if (typeDirevative.value === "KOL’s")
         return arr.filter((item) => {
           if (item.id === 21 || item.id === 22) return item;
         });

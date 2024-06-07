@@ -93,25 +93,33 @@ export default function () {
       } else currentElem = currentElem.parentElement;
     }
     if (isPopup.value) {
+
       const pageHeight = window.innerHeight + window.pageYOffset;
       const windowHeight =
-        currentElem.getBoundingClientRect().height +
-        currentElem.getBoundingClientRect().top +
-        window.pageYOffset;
+      currentElem.getBoundingClientRect().height +
+      currentElem.getBoundingClientRect().top +
+      window.pageYOffset;
       const positionY =
-        currentElem.getBoundingClientRect().top + window.pageYOffset;
+      currentElem.getBoundingClientRect().top + window.pageYOffset;
       popup.value.style.display = "block";
       setTimeout(() => {
-        const popupHeight = popup.value.offsetHeight;
+          if (window.innerWidth > 1024) {
+          const popupHeight = popup.value.offsetHeight;
 
-        popup.value.style.top =
-          positionY -
-          currentElem.getBoundingClientRect().height -
-          popupHeight +
-          "px";
-      }, 0);
+          popup.value.style.top =
+            positionY -
+            currentElem.getBoundingClientRect().height -
+            popupHeight +
+            "px";
+          }
+          else {
+            popup.value.style.position = 'fixed'
+            popup.value.style.top = '50%';
+            popup.value.style.transform = 'translateY(-50%)';
+        }
+        }, 0);
     }
-    console.log(isPopup.value);
+
   };
   const buy = (e, id) => {
     popupContent.value = { popup_name: "buy", id: id };

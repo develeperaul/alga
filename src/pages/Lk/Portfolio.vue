@@ -4,7 +4,7 @@
   >
     <div class="xl:tw-flex tw-justify-between tw-mb-14">
       <h2 class="tw-mb-3 xl:tw-mb-0">{{ t("title") }}</h2>
-      <div class="tw-flex-wrap tw-justify-end tw-flex tw-gap-3 xl:tw-gap-14">
+      <!-- <div class="tw-flex-wrap tw-justify-end tw-flex tw-gap-3 xl:tw-gap-14">
         <div>
           <div
             class="tw-text-xxs-1 tw-text-gray tw-flex tw-items-center tw-justify-end tw-gap-1.5 tw-mb-4"
@@ -45,7 +45,7 @@
             <span class="tw-text-green"> 0% </span>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="tw-grid xl:tw-flex tw-gap-6.25">
       <div class="xl:tw-w-1/2">
@@ -390,7 +390,7 @@
         ref="popup"
       >
         <template v-if="popupContent.popup_name === 'widthdrawal'">
-          <div class="tw-text-lg tw-leading-snug xl:tw-text-md2 tw-mb-2.5">
+          <div class=" tw-text-md1 g tw-leading-snug xl:tw-text-md2 tw-mb-2.5">
             {{ t("popup.title") }}
           </div>
           <p class="tw-text-purple-dark tw-text-base xl:tw-text-sm tw-mb-5">
@@ -425,7 +425,7 @@
           </Form>
         </template>
         <template v-else-if="popupContent.popup_name === 'buy'">
-          <div class="tw-text-lg tw-leading-snug xl:tw-text-md2 tw-mb-2.5">
+          <div class="tw-text-md1  tw-leading-snug xl:tw-text-md2 tw-mb-2.5">
             {{ t("popup.titleBuy") }}
           </div>
           <Form
@@ -509,7 +509,7 @@ const i18n = {
     },
     "en-US": {
       monthly_change: "Monthly change",
-      title: "My Prortfolio",
+      title: "My Portfolio",
       card: {
         title: "Balance",
       },
