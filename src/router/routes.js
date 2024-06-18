@@ -16,7 +16,19 @@ const routes = [
         path: "/about",
         component: () => import("pages/About.vue"),
         name: "about",
-      }
+      },
+    ],
+  },
+
+  {
+    path: "/",
+    component: () => import("layouts/StaticPageLayout.vue"),
+    children: [
+      {
+        path: "/user-agreement",
+        component: () => import("pages/UserAgreement.vue"),
+        name: "user-agreement",
+      },
     ],
   },
 
