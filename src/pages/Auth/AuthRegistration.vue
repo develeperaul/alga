@@ -119,6 +119,7 @@ import { useStore } from "vuex";
 import AuthCodeVerification from "src/components/AuthCodeVerification.vue";
 import { useI18n } from "vue-i18n";
 import { AppAlert } from "src/plugins/app-alert";
+
 const messages = {
   "ru-RU": {
     header: "Зарегистрируйтесь",
@@ -147,14 +148,17 @@ export default {
     const store = useStore();
     const { t } = useI18n({ messages });
     const { changeStep, step } = useStep("registr");
-    const { setPassword, invalidCode, curCode, mail, getCode } = useAuth();
+    const { setPassword, invalidCode, curCode, mail, getCode } = useAuth()
 
     const registr = async ({ cellphone, name, email }, { setErrors }) => {
       try {
+        const referral_code = localStorage.getItem('referral_code');
+
         const data = await store.dispatch("auth/registr", {
           cellphone: `+${cellphone.replace("+", "")}`,
           name,
           email,
+          referral_code,
         });
 
         mail.value = data.email;
