@@ -118,7 +118,18 @@
             class="card card_border card-derivative"
             v-for="derivative in derivatives"
             :key="derivative.id"
+            @click="showedIndexId = derivative.id"
           >
+            <IndexDetailedModal
+              ref="detailed"
+              :showed="derivative.id === showedIndexId"
+              @update:showed="showedIndexId = null"
+              :derivative="derivative"
+              :round-diagram="{
+                values: roundDiagramData(derivative['currency_shares']),
+                colors: roundDiagramColors(derivative['currency_shares']),
+              }"
+            />
             <div class="tw-flex tw-gap-3.5 tw-items-center">
               <div class="circle tw-flex-shrink-0">
                 <img :src="derivative.image.url" alt="" />
@@ -151,16 +162,9 @@
                 </div>
               </div>
               <div>
-                <!-- <button
-                  @click="stage2"
-                  class="tw-mt-2 tw-flex tw-gap-1.5 tw-items-center"
-                >
-                  <span class="buy">{{ t("buy") }}</span>
-                </button> -->
-
                 <base-button
                   data-index
-                  @click="stage2($event, derivative.id)"
+                  @click.stop="stage2($event, derivative.id)"
                   class="button tw-w-full xl:tw-w-auto"
                   >{{ t("buy") }}</base-button
                 >
@@ -391,6 +395,8 @@ import { useStore } from "vuex";
 import useChart from "src/composition/useChart.js";
 import useChartData from "src/composition/V3/useChartData.js";
 import useBuyWidthdrawalPopup from "src/composition/V3/useBuyWidthdrawalPopup";
+import IndexDetailedModal from 'src/components/LK/Modal/IndexDetailed.vue';
+
 const i18n = {
   messages: {
     "en-US": {
@@ -545,11 +551,14 @@ export default {
     AreaChart,
     MarkIcon,
     MiniAreaChart,
+    IndexDetailedModal,
   },
   setup() {
     const slide = ref(1);
     const store = useStore();
     const { charts, getChart } = useChart();
+    const showedIndexId = ref(null);
+
     const {
       btnMainData,
       ethMainData,
@@ -660,6 +669,7 @@ export default {
       typeDirevative,
       typesDirevative,
       selectTypeDirevatives,
+      showedIndexId,
     };
   },
   methods: {
@@ -672,74 +682,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 //$
-.accordion {
-  &__head {
-    @apply tw-flex tw-items-center tw-justify-between  tw-px-9 tw-py-3.5 tw-w-full;
-    background: #262d34;
-  }
-  &__body {
-    @apply tw-grid  tw-overflow-hidden tw-my-0;
-    @apply tw-transition-all tw-duration-300 tw-ease-out;
-    grid-template-rows: 0fr;
-    .child {
-      @apply tw-min-h-0;
-    }
-  }
-  .icon {
-    @apply tw-transition-transform tw-duration-300 tw-ease-out;
-  }
-  &.active &__head {
-    background: #0a8f2d;
-  }
-  &.active .icon {
-    @apply tw-transform tw-rotate-180;
-  }
-  &.active &__body {
-    grid-template-rows: 1fr;
-    margin-top: 20px;
-    margin-bottom: 40px;
-  }
-}
-.content-page {
-  @screen xl {
-    display: grid;
-    grid-template-columns: 257px 1fr;
-  }
 
-  .item-chart {
-    @apply tw-grid tw-grid-cols-2  tw-px-9 tw-py-3.5 tw-w-full;
-    &:hover,
-    &.active {
-      background: #171d26;
-      box-shadow: 0px 99.7167px 39.8867px rgba(1, 3, 24, 0.01),
-        0px 55.97px 33.4533px rgba(1, 3, 24, 0.05),
-        0px 25.09px 25.09px rgba(1, 3, 24, 0.09),
-        0px 6.43333px 13.51px rgba(1, 3, 24, 0.1),
-        0px 0px 0px rgba(1, 3, 24, 0.1);
-    }
-  }
-}
-.index-directive {
-  .text {
-    max-width: 539px;
-  }
-}
-.slide-button {
-  cursor: pointer;
-  opacity: 0.5;
-  width: 60px;
-  height: 60px;
-  transition: opacity 0.2s ease;
-  @include screen-xl {
-    width: 40px;
-    height: 40px;
-  }
-  &.active {
-    opacity: 1;
-  }
-}
 .inside {
   display: flex;
   flex-direction: column;
@@ -812,6 +757,84 @@ export default {
   }
 }
 
+.coinlist {
+  .item {
+    @include screen-xl {
+      width: 318px;
+    }
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+//$
+.accordion {
+  &__head {
+    @apply tw-flex tw-items-center tw-justify-between  tw-px-9 tw-py-3.5 tw-w-full;
+    background: #262d34;
+  }
+  &__body {
+    @apply tw-grid  tw-overflow-hidden tw-my-0;
+    @apply tw-transition-all tw-duration-300 tw-ease-out;
+    grid-template-rows: 0fr;
+    .child {
+      @apply tw-min-h-0;
+    }
+  }
+  .icon {
+    @apply tw-transition-transform tw-duration-300 tw-ease-out;
+  }
+  &.active &__head {
+    background: #0a8f2d;
+  }
+  &.active .icon {
+    @apply tw-transform tw-rotate-180;
+  }
+  &.active &__body {
+    grid-template-rows: 1fr;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}
+.content-page {
+  @screen xl {
+    display: grid;
+    grid-template-columns: 257px 1fr;
+  }
+
+  .item-chart {
+    @apply tw-grid tw-grid-cols-2  tw-px-9 tw-py-3.5 tw-w-full;
+    &:hover,
+    &.active {
+      background: #171d26;
+      box-shadow: 0px 99.7167px 39.8867px rgba(1, 3, 24, 0.01),
+        0px 55.97px 33.4533px rgba(1, 3, 24, 0.05),
+        0px 25.09px 25.09px rgba(1, 3, 24, 0.09),
+        0px 6.43333px 13.51px rgba(1, 3, 24, 0.1),
+        0px 0px 0px rgba(1, 3, 24, 0.1);
+    }
+  }
+}
+.index-directive {
+  .text {
+    max-width: 539px;
+  }
+}
+.slide-button {
+  cursor: pointer;
+  opacity: 0.5;
+  width: 60px;
+  height: 60px;
+  transition: opacity 0.2s ease;
+  @include screen-xl {
+    width: 40px;
+    height: 40px;
+  }
+  &.active {
+    opacity: 1;
+  }
+}
+
 .statistics {
   &__bottom {
     display: flex;
@@ -823,14 +846,6 @@ export default {
       display: grid;
       gap: 55px;
       grid-template-columns: 1fr 170px;
-    }
-  }
-}
-
-.coinlist {
-  .item {
-    @include screen-xl {
-      width: 318px;
     }
   }
 }
