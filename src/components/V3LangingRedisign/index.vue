@@ -1,7 +1,7 @@
 <!-- <template src="./index.html"></template> -->
 <template>
   <div>
-    <header class="">
+    <component :is="headerOnly ? 'div' : 'header'" class="header" :class="{ 'header--maximized': !headerOnly }">
       <div class="tw-container tw-h-full">
         <div class="header__top">
           <img
@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <div class="header-content">
+        <div v-if="!headerOnly" class="header-content">
           <h2 class="header-content__title">{{ t("header.title") }}</h2>
           <div
             class="tw-text-md2 xl:tw-text-md1 tw-leading-none tw-mb-4 xl:tw-mb-10"
@@ -128,133 +128,135 @@
           </div>
         </div>
       </div>
-    </header>
-    <Direvatives :charts="charts"/>
-    <section class="section backers-partner">
-      <div class="tw-container">
-        <h2 class="title tw-mb-7.5">{{ t("backers.title") }}</h2>
-        <p class="tw-mb-7">
-          {{ t("backers.text") }}
-        </p>
-        <div class="tw-mt-10 tw-grid tw-gap-4 ">
-          <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-3">
+    </component>
+    <template v-if="!headerOnly">
+      <Direvatives :charts="charts"/>
+      <section class="section backers-partner">
+        <div class="tw-container">
+          <h2 class="title tw-mb-7.5">{{ t("backers.title") }}</h2>
+          <p class="tw-mb-7">
+            {{ t("backers.text") }}
+          </p>
+          <div class="tw-mt-10 tw-grid tw-gap-4 ">
+            <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-3">
 
-            <div class="card-partner  xl:tw-justify-self-end">
-              <a href="#">
-                <img src="./img/backers/okx.png" alt="" width="134" height="60" />
-              </a>
+              <div class="card-partner  xl:tw-justify-self-end">
+                <a href="#">
+                  <img src="./img/backers/okx.png" alt="" width="134" height="60" />
+                </a>
+              </div>
+              <div class="card-partner xl:tw-justify-self-center">
+                <a href="#">
+                  <img src="./img/backers/bitunix.png" alt="" width="205" height="40" />
+                </a>
+              </div>
+              <div class="card-partner">
+                <a href="#">
+                  <img src="./img/backers/take-profit.png" alt="" width="144" height="63" />
+                </a>
+              </div>
             </div>
-            <div class="card-partner xl:tw-justify-self-center">
-              <a href="#">
-                <img src="./img/backers/bitunix.png" alt="" width="205" height="40" />
-              </a>
+            <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-4">
+
+              <div class="card-partner xl:tw-justify-self-end">
+                <a href="#">
+                  <img src="./img/backers/salad.png" alt="" width="344" height="96"/>
+                </a>
+              </div>
+              <div class="card-partner xl:tw-justify-self-center">
+                <a href="#">
+                  <img src="./img/backers/ox.png" alt="" width="227" height="40" />
+                </a>
+              </div>
+              <div class="card-partner xl:tw-justify-self-center">
+                <a href="#">
+                  <img src="./img/backers/abc.png" alt="" width="179" height="28"/>
+                </a>
+              </div>
+              <div class="card-partner">
+                <a href="#">
+                  <img src="./img/backers/fakel.png" alt="" width="112" height="112"/>
+                </a>
+              </div>
             </div>
-            <div class="card-partner">
-              <a href="#">
-                <img src="./img/backers/take-profit.png" alt="" width="144" height="63" />
-              </a>
+            <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-3">
+
+              <div class="card-partner xl:tw-justify-self-end">
+                <a href="#">
+                  <img src="./img/backers/terra-crypto.png" alt="" width="222" height="52" />
+                </a>
+              </div>
+              <div class="card-partner xl:tw-justify-self-center">
+                <a href="#">
+                  <img src="./img/backers/bring.png" alt="" width="206" height="52" />
+                </a>
+              </div>
+              <div class="card-partner">
+                <a href="#">
+                  <img src="./img/backers/aot-konsalding.png" alt="" width="277" height="42"/>
+                </a>
+              </div>
             </div>
           </div>
-          <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-4">
-
-            <div class="card-partner xl:tw-justify-self-end">
-              <a href="#">
-                <img src="./img/backers/salad.png" alt="" width="344" height="96"/>
-              </a>
+        </div>
+      </section>
+      <section class="section backers-partner">
+        <div class="tw-container">
+          <div class="tw-flex tw-gap-8">
+            <div class="tw-grid xl:tw-block">
+              <h2 class="title tw-mb-7.5">{{ t("about.title") }}</h2>
+              <!-- <p class="tw-mb-10" v-html="t('about.text')"></p> -->
+              <p>
+                {{ t("about.subtitle") }}
+              </p>
+              <br />
+              <p class="tw-mb-7.5" v-html="t('about.text')"></p>
+              <button
+                class="button button_base button_green button_minw-md"
+                @click="$router.push({ name: 'about' })"
+              >
+                {{ t("about.button") }}
+              </button>
             </div>
-            <div class="card-partner xl:tw-justify-self-center">
-              <a href="#">
-                <img src="./img/backers/ox.png" alt="" width="227" height="40" />
-              </a>
-            </div>
-            <div class="card-partner xl:tw-justify-self-center">
-              <a href="#">
-                <img src="./img/backers/abc.png" alt="" width="179" height="28"/>
-              </a>
-            </div>
-            <div class="card-partner">
-              <a href="#">
-                <img src="./img/backers/fakel.png" alt="" width="112" height="112"/>
-              </a>
+            <div class="tw-hidden xl:tw-block tw-w-1/2 tw-flex-shrink-0">
+              <img :src="require('assets/images/AA_2redisign.png')" alt="" />
             </div>
           </div>
-          <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-3">
+          <div class="card-big tw-mt-16 xl:tw-mt-10">
+            <img
+              :src="require('assets/icons/telegram-round.svg')"
+              alt="plus"
+              class="top-icon"
+            />
+            <div class="card-big__left">
+              <h2>{{ t("card-big.anyquestion.title") }}</h2>
+              <p class="tw-mt-5">
+                {{ t("card-big.anyquestion.text") }}
+              </p>
+            </div>
 
-            <div class="card-partner xl:tw-justify-self-end">
-              <a href="#">
-                <img src="./img/backers/terra-crypto.png" alt="" width="222" height="52" />
+            <div
+              class="tw-flex tw-flex-col tw-mt-7.5 tw-gap-5 xl:tw-mt-0 xl:tw-flex-row xl:tw-gap-3"
+            >
+              <a
+                class="button button_base button_green"
+                href="https://t.me/algafinance_int"
+                target="blank"
+              >
+                {{ t("card-big.anyquestion.contacrusButton") }}
               </a>
-            </div>
-            <div class="card-partner xl:tw-justify-self-center">
-              <a href="#">
-                <img src="./img/backers/bring.png" alt="" width="206" height="52" />
-              </a>
-            </div>
-            <div class="card-partner">
-              <a href="#">
-                <img src="./img/backers/aot-konsalding.png" alt="" width="277" height="42"/>
+              <a
+                class="button button_base button_black button_minw-base"
+                href="https://t.me/algafinance"
+                target="blank"
+              >
+                {{ t("card-big.anyquestion.joinButton") }}
               </a>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="section backers-partner">
-      <div class="tw-container">
-        <div class="tw-flex tw-gap-8">
-          <div class="tw-grid xl:tw-block">
-            <h2 class="title tw-mb-7.5">{{ t("about.title") }}</h2>
-            <!-- <p class="tw-mb-10" v-html="t('about.text')"></p> -->
-            <p>
-              {{ t("about.subtitle") }}
-            </p>
-            <br />
-            <p class="tw-mb-7.5" v-html="t('about.text')"></p>
-            <button
-              class="button button_base button_green button_minw-md"
-              @click="$router.push({ name: 'about' })"
-            >
-              {{ t("about.button") }}
-            </button>
-          </div>
-          <div class="tw-hidden xl:tw-block tw-w-1/2 tw-flex-shrink-0">
-            <img :src="require('assets/images/AA_2redisign.png')" alt="" />
-          </div>
-        </div>
-        <div class="card-big tw-mt-16 xl:tw-mt-10">
-          <img
-            :src="require('assets/icons/telegram-round.svg')"
-            alt="plus"
-            class="top-icon"
-          />
-          <div class="card-big__left">
-            <h2>{{ t("card-big.anyquestion.title") }}</h2>
-            <p class="tw-mt-5">
-              {{ t("card-big.anyquestion.text") }}
-            </p>
-          </div>
-
-          <div
-            class="tw-flex tw-flex-col tw-mt-7.5 tw-gap-5 xl:tw-mt-0 xl:tw-flex-row xl:tw-gap-3"
-          >
-            <a
-              class="button button_base button_green"
-              href="https://t.me/algafinance_int"
-              target="blank"
-            >
-              {{ t("card-big.anyquestion.contacrusButton") }}
-            </a>
-            <a
-              class="button button_base button_black button_minw-base"
-              href="https://t.me/algafinance"
-              target="blank"
-            >
-              {{ t("card-big.anyquestion.joinButton") }}
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </template>
   </div>
   <Teleport to="body">
     <transition
@@ -963,6 +965,12 @@ Our approach involves the integration and creation of advanced indices by includ
   },
 };
 export default {
+  props: {
+    headerOnly: {
+      default: false,
+      type: Boolean
+    }
+  },
   components: {
     MiniAreaChart,
     MarkIcon,

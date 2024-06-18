@@ -1,9 +1,13 @@
 header {
-  height: 100vh;
+  &.header {
+    &--maximized {
+      height: 100vh;
+      background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 20.83%),
+        url(./img/header.png) center no-repeat;
+      background-size: cover;
+    }
+  }
 
-  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 20.83%),
-    url(./img/header.png) center no-repeat;
-  background-size: cover;
   .header__top {
     display: flex;
     align-items: center;
