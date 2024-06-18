@@ -130,6 +130,18 @@
           </div>
         </Form>
       </div>
+      <div class="profile-step__item tw-mt-5" v-if="referralLink">
+        <div class="tw-text-purple-dark">{{ t("ref-title") }}</div>
+        <div>
+          <a :href="referralLink" target="_blank">{{ referralLink }}</a>
+        </div>
+        <button
+          class="tw-text-purple-light tw-cursor-pointer"
+          @click="copyRefLink"
+        >
+          {{ t("copy") }}
+        </button>
+      </div>
       <base-button @click.prevent="$app.logout"  class=" tw-mt-5"> {{ t("exit") }}</base-button>
     </div>
   </section>
@@ -149,10 +161,13 @@ const i18n = {
       title: "Профиль",
       edit: "Изменить",
       cancel: "Отменить",
+      copy: "Скопировать",
+      successCopy: 'Реферальная ссылка скопирована!',
       "password-title": "Пароль",
       "change-password": "Изменить пароль",
       "change-phone": "Изменить телефон",
       "phone-title": "Новый номер телефона",
+      "ref-title": "Реферальная ссылка",
       exit:'Выход',
       phone: {
         label: "Номер телефона",
@@ -162,10 +177,13 @@ const i18n = {
       title: "Profile",
       edit: "Edit",
       cancel: "Cancel",
+      copy: "Copy",
+      successCopy: 'Referral link copied!',
       "password-title": "Password",
       "change-password": "Change Password",
       "change-phone": "Change Phone",
       "phone-title": "New Phone Number",
+      "ref-title": "Referral link",
       exit:'Exit',
       phone: {
         label: "Phone number",
@@ -209,7 +227,7 @@ export default {
     };
 
     const updateEmail = () => {
-      
+
     };
     const updatePassword = async (values, { setErrors }) => {
       try {
@@ -270,6 +288,15 @@ export default {
     const email = computed(() => store.getters["profile/email"]);
     const name = computed(() => store.getters["profile/name"]);
     const phone = computed(() => store.getters["profile/phone"]);
+    const referralLink = computed(() => store.getters["profile/referralLink"]);
+
+    function copyRefLink() {
+      navigator.clipboard.writeText(referralLink.value);
+      AppAlert({
+        message: t('successCopy'),
+        type: "positive",
+      });
+    }
 
     const editPassword = ref(false);
     const editPhone = ref(false);
@@ -280,6 +307,7 @@ export default {
       updateEmail,
       updatePassword,
       updatePhone,
+      copyRefLink,
       isErrorEmail,
       isErrorPassword,
       isErrorPhone,
@@ -290,6 +318,7 @@ export default {
 
       email,
       phone,
+      referralLink,
 
       editPassword,
       editPhone,
@@ -305,7 +334,7 @@ export default {
   @apply tw-flex tw-flex-col tw-py-10 tw-px-6
   xl:tw-flex-row xl:tw-items-end xl:tw-justify-between
   xl:tw-py-10;
-  
+
   padding: 40px 25px;
   position: relative;
 
