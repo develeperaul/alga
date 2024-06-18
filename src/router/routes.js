@@ -46,6 +46,11 @@ const routes = [
           name: "portfolio",
         },
         {
+          path: "referals",
+          component: () => import("pages/Lk/Referrals.vue"),
+          name: "referals",
+        },
+        {
           path: "support",
           component: () => import("pages/Lk/Support.vue"),
           name: "support",
@@ -86,7 +91,7 @@ const routes = [
     ],
   },
 
-  
+
 
   // Always leave this as last one,
   // but you can also remove it

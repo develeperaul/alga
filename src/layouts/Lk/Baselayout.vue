@@ -15,7 +15,7 @@
             class="tw-cursor-pointer"
             @click="$router.push({ name: 'home' })"
           />
-          
+
 
             <ul class="nav-links tw-hidden xl:tw-flex tw-gap-8 tw-flex-grow tw-px-24">
               <router-link
@@ -57,8 +57,19 @@
                   <span class="item__text"> {{ t("nav[2]") }} </span>
                 </li>
               </router-link>
-  
-              
+              <router-link
+                :to="{ name: 'referals' }"
+                custom
+                v-slot="{ isExactActive, navigate }"
+              >
+                <li
+                  class="nav-links__item item tw-flex tw-items-center tw-gap-5"
+                  :class="{ active: isExactActive }"
+                  @click="navigate"
+                >
+                  <span class="item__text"> {{ t("nav[4]") }} </span>
+                </li>
+              </router-link>
               <!-- <router-link
                 :to="{ name: 'history' }"
                 custom
@@ -112,7 +123,7 @@
                 </div>
               </div>
             </div>
-          
+
           <div class="desk-n tw-flex tw-items-center tw-gap-4">
             <Locale />
             <div>
@@ -273,7 +284,7 @@
             </li>
           </router-link>
 
-          
+
         </ul>
       </div>
     </q-footer>
@@ -291,7 +302,7 @@ const i18n = {
   messages: {
     "ru-RU": {
       nav: ["Деривативы", "Портфолио",
-      'История', "Профиль"
+      'История', "Профиль", "Рефералы"
       //  "История", "Поддержка", "Рефералы"
       ],
       "log-out": "Выйти",
@@ -304,9 +315,9 @@ const i18n = {
         "My Portfolio",
         "History",
         "Profile",
+        "Referrals",
         // "History",
         // "Support",
-        // "Referrals",
       ],
 
       "log-out": "Log out",
@@ -328,7 +339,7 @@ const i18n = {
       edit: " Bearbeiten",
     },
     "zh-CN": {
-      nav: ["指数衍生品", "我的投资组合", 
+      nav: ["指数衍生品", "我的投资组合",
       '留言'
       // "历史", "支持", "轉介"
       ],
