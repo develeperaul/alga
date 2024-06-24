@@ -29,6 +29,11 @@ const routes = [
         component: () => import("pages/UserAgreement.vue"),
         name: "user-agreement",
       },
+      {
+        path: "/roadmap",
+        component: () => import("pages/Roadmap.vue"),
+        name: "roadmap",
+      },
     ],
   },
 

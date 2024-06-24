@@ -66,7 +66,7 @@
               <router-link :to="{ name: 'profile' }">
                 {{ t("platform.list[0]") }}
               </router-link>
-              <router-link :to="'/'">
+              <router-link :to="{ name: 'roadmap' }">
                 {{ t("platform.list[1]") }}
               </router-link>
               <router-link :to="'/'">
