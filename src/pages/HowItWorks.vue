@@ -4,7 +4,7 @@
       <h1 class="app-h1 app-h1--space">{{ t('title') }}</h1>
       <ProjectSchema class="tw-mb-16" />
       <section>
-        <h2 class="app-h1 tw-mb-6">Емкость рынка индексов</h2>
+        <h2 class="app-h1 tw-mb-6">{{ t('marketVolTitle') }}</h2>
         <MarketVolumeReport />
       </section>
     </div>
@@ -19,9 +19,11 @@
   const messages = {
     'ru-RU': {
       title: 'Как работает проект',
+      marketVolTitle: 'Емкость рынка индексов',
     },
     'en-US': {
       title: 'How it works',
+      marketVolTitle: 'Market volume',
     },
   };
 

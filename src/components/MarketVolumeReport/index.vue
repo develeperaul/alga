@@ -1,7 +1,7 @@
 <template>
   <div class="market-vol-report">
     <ul class="market-vol-report__points">
-      <li class="vol-point" v-for="point in data.points">
+      <li class="vol-point" v-for="point in points">
         <span>
           <IconStar />
         </span>
@@ -15,8 +15,21 @@
 </template>
 
 <script setup>
+  import { computed } from 'vue';
   import data from './data';
   import IconStar from './IconStar.vue';
+  import useLocal from 'src/composition/V3/useLocal';
+
+  const { locale } = useLocal();
+
+  const pointsLangs = {
+    'English': data.pointsEn,
+    'Русский': data.pointsRu,
+  };
+
+  const points = computed(() => {
+    return pointsLangs[locale.value];
+  });
 </script>
 
 <style scoped lang="scss">
