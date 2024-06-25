@@ -18,12 +18,16 @@
     display: flex;
     flex-wrap: wrap;
     margin-left: -90px;
-    margin-top: -18px;
+    margin-top: -32px;
 
     &__item {
       margin-left: 90px;
-      margin-top: 18px;
+      margin-top: 32px;
       width: calc(50% - 90px);
+
+      @media screen and (max-width: 930px) {
+        width: calc(100% - 90px);
+      }
     }
   }
 </style>

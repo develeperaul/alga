@@ -37,12 +37,21 @@
       display: flex;
       gap: 28px;
       align-items: flex-start;
+
+      @media screen and (max-width: 460px) {
+        gap: 12px;
+      }
     }
 
     &__icon-wrap {
       width: 141px;
       height: 108px;
       flex-shrink: 0;
+
+      @media screen and (max-width: 460px) {
+        width: 101px;
+        height: 80px;
+      }
 
       img {
         width: 100%;

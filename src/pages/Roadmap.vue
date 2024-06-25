@@ -1,7 +1,7 @@
 <template>
   <q-page class="app-page-y">
     <div class="tw-container">
-      <h1 class="app-h1 app-h1--space">{{ t('title') }}</h1>
+      <h1 class="app-h1 tw-mb-16">{{ t('title') }}</h1>
       <RoadmapStageList />
     </div>
   </q-page>
