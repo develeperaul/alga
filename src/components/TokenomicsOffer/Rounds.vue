@@ -1,30 +1,30 @@
 <template>
   <section class="offer-rounds">
     <article class="offer-rounds__item">
-      <p class="offer-rounds__title">Первый раунд</p>
+      <p class="offer-rounds__title">{{ t('firstRound') }}</p>
       <div class="offer-rounds__body">
         <p class="offer-rounds__option">
-          Цена токена: <span class="offer-rounds__amount">$0.154</span>
+          {{ t('tokenPrice') }}: <span class="offer-rounds__amount">$0.154</span>
         </p>
         <p class="offer-rounds__option">
-          Оценка проекта: <span class="offer-rounds__amount">$7.700.000</span>
+          {{ t('valuation') }}: <span class="offer-rounds__amount">$7.700.000</span>
         </p>
         <p class="offer-rounds__option">
-          Привлекаемый капитал: <span class="offer-rounds__amount">$1.000.000</span>
+          {{ t('raisingTarget') }}: <span class="offer-rounds__amount">$1.000.000</span>
         </p>
       </div>
     </article>
     <article class="offer-rounds__item">
-      <p class="offer-rounds__title">Второй раунд</p>
+      <p class="offer-rounds__title">{{ t('secondRound') }}</p>
       <div class="offer-rounds__body">
         <p class="offer-rounds__option">
-          Цена токена: <span class="offer-rounds__amount">$0.429</span>
+          {{ t('tokenPrice') }}: <span class="offer-rounds__amount">$0.429</span>
         </p>
         <p class="offer-rounds__option">
-          Оценка проекта: <span class="offer-rounds__amount">$19.600.000</span>
+          {{ t('valuation') }}: <span class="offer-rounds__amount">$19.600.000</span>
         </p>
         <p class="offer-rounds__option">
-          Привлекаемый капитал: <span class="offer-rounds__amount">$1.500.000</span>
+          {{ t('raisingTarget') }}: <span class="offer-rounds__amount">$1.500.000</span>
         </p>
       </div>
     </article>
@@ -32,7 +32,26 @@
 </template>
 
 <script setup>
+  import { useI18n } from 'vue-i18n';
 
+  const messages = {
+    'en-US': {
+      firstRound: 'First round',
+      secondRound: 'Second round',
+      tokenPrice: 'Token price',
+      valuation: 'Valuation',
+      raisingTarget: 'Raising Target',
+    },
+    'ru-RU': {
+      firstRound: 'Первый раунд',
+      secondRound: 'Второй раунд',
+      tokenPrice: 'Цена токена',
+      valuation: 'Оценка проекта',
+      raisingTarget: 'Привлекаемый капитал',
+    },
+  };
+
+  const { t } = useI18n({ messages });
 </script>
 
 <style scoped lang="scss">
