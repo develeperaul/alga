@@ -34,6 +34,11 @@ const routes = [
         component: () => import("pages/Roadmap.vue"),
         name: "roadmap",
       },
+      {
+        path: "/howitworks",
+        component: () => import("pages/HowItWorks.vue"),
+        name: "howitworks",
+      },
     ],
   },
 

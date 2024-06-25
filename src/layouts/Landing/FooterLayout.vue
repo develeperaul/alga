@@ -63,7 +63,7 @@
           <div>
             <div class="tw-mb-5">{{ t("platform.title") }}</div>
             <div class="links tw-flex tw-flex-col tw-gap-3.5">
-              <router-link :to="{ name: 'profile' }">
+              <router-link :to="{ name: 'howitworks' }">
                 {{ t("platform.list[0]") }}
               </router-link>
               <router-link :to="{ name: 'roadmap' }">
