@@ -2,7 +2,7 @@
   <section class="roadmap-items">
     <Item
       class="roadmap-items__item"
-      v-for="item in data"
+      v-for="item in items"
       :item="item"
     />
   </section>
@@ -11,6 +11,20 @@
 <script setup>
   import Item from './Item';
   import data from './data';
+
+  import useLocal from 'src/composition/V3/useLocal';
+  import { computed } from 'vue';
+
+  const { locale } = useLocal();
+
+  const itemsLangs = {
+    'English': data.stagesEn,
+    'Русский': data.stagesRu,
+  };
+
+  const items = computed(() => {
+    return itemsLangs[locale.value];
+  });
 </script>
 
 <style scoped lang="scss">
