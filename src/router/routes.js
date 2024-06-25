@@ -39,6 +39,11 @@ const routes = [
         component: () => import("pages/HowItWorks.vue"),
         name: "howitworks",
       },
+      {
+        path: "/tokenomics",
+        component: () => import("pages/Tokenomics.vue"),
+        name: "tokenomics",
+      },
     ],
   },
 

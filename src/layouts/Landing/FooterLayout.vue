@@ -69,7 +69,7 @@
               <router-link :to="{ name: 'roadmap' }">
                 {{ t("platform.list[1]") }}
               </router-link>
-              <router-link :to="'/'">
+              <router-link :to="{ name: 'tokenomics' }">
                 {{ t("platform.list[2]") }}
               </router-link>
               <router-link :to="{ name: 'user-agreement' }">
