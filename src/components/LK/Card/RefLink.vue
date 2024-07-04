@@ -1,5 +1,5 @@
 <template>
-  <section class="ref-card tw-max-w-[430px] tw-mb-8" v-if="referralLink">
+  <section class="card-bordered tw-max-w-[430px] tw-mb-8" v-if="referralLink">
     <h2 class="tw-text-sm tw-mb-4">{{ t('title') }}</h2>
     <div class="tw-mb-2">
       <a :href="referralLink" target="_blank">{{ referralLink }}</a>
@@ -43,22 +43,3 @@
     });
   }
 </script>
-
-<style scoped lang="scss">
-  .ref-card {
-    position: relative;
-    padding: 35px 38px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1.04002px solid #575656;
-    box-shadow: 0px 155.373px 62.149px rgba(1, 3, 24, 0.01),
-      0px 87.2091px 52.125px rgba(1, 3, 24, 0.05),
-      0px 39.0937px 39.0937px rgba(1, 3, 24, 0.09),
-      0px 10.024px 21.0505px rgba(1, 3, 24, 0.1), 0px 0px 0px rgba(1, 3, 24, 0.1);
-    border-radius: 7.80016px;
-    & .filter {
-      position: absolute;
-      right: 16px;
-      top: 15px;
-    }
-  }
-</style>

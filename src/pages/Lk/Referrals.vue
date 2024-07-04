@@ -3,7 +3,10 @@
     <Suspense>
       <div class="tw-container">
         <h1 class="h2 tw-mb-10">{{ t('title') }}</h1>
-        <CardRefLink class="tw-mb-10" />
+        <div class="tw-flex tw-flex-wrap tw-gap-6 tw-justify-between">
+          <CardRefLink class="tw-mb-10 tw-w-full" />
+          <RefBalance class="tw-w-full" />
+        </div>
         <section>
           <h2 class="h4 tw-mb-5">{{ t('title2') }}</h2>
           <TableReferrals />
@@ -17,6 +20,7 @@
   import { useI18n } from 'vue-i18n';
   import TableReferrals from 'src/components/LK/Table/Referrals.vue';
   import CardRefLink from 'src/components/LK/Card/RefLink.vue';
+  import RefBalance from 'src/components/LK/Card/RefBalance.vue';
 
   const i18n = {
     messages: {

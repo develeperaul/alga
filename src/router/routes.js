@@ -78,6 +78,11 @@ const routes = [
           name: "referals",
         },
         {
+          path: "output-bonuses",
+          component: () => import("pages/Lk/OutputBonuses.vue"),
+          name: "output-bonuses",
+        },
+        {
           path: "support",
           component: () => import("pages/Lk/Support.vue"),
           name: "support",
