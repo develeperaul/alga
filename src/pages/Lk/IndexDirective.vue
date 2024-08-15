@@ -6,7 +6,9 @@
     >
       <div class="tw-overflow-auto">
         <h4 class="tw-px-9 tw-py-8">{{ t("titleSidebar") }}:</h4>
+
         <div class="tw-grid tw-mb-4">
+
           <div
             v-for="item in typesDirevative"
             class="accordion"
@@ -102,6 +104,8 @@
 
       <div
         class="tw-flex xl:tw-hidden tw-justify-center xl:tw-gap-5 tw-gap-3 tw-mb-5"
+
+
       >
         <base-button
           v-for="item in typesDirevative"
@@ -120,6 +124,7 @@
             :key="derivative.id"
             @click="showedIndexId = derivative.id"
           >
+
             <IndexDetailedModal
               ref="detailed"
               :showed="derivative.id === showedIndexId"
@@ -159,16 +164,19 @@
                 <div class="tw-flex tw-gap-x-2.5">
                   <MarkIcon :mark="getChart(derivative.id)?.profitability" />
                   <h4>{{ getChart(derivative.id)?.profitability }}%</h4>
+
                 </div>
               </div>
               <div>
                 <base-button
                   data-index
+
                   @click.stop="stage2($event, derivative.id)"
                   class="button tw-w-full xl:tw-w-auto"
                   >{{ t("buy") }}</base-button
                 >
               </div>
+
             </div>
           </div>
         </div>
@@ -211,6 +219,7 @@
                 </RoundDiagram>
               </div>
 
+
               <div class="tw-flex-grow">
                 <div class="item tw-mb-5 tw-flex tw-justify-between">
                   <div class="tw-flex tw-gap-10 tw-items-center">
@@ -225,6 +234,7 @@
                         }}
                       </p>
                     </div>
+
                   </div>
                   <base-button
                     data-index
@@ -232,6 +242,7 @@
                     class="button tw-w-full tw-hidden xl:tw-block xl:tw-w-auto"
                     >{{ t("buy") }}</base-button
                   >
+
                 </div>
                 <base-button
                   data-index
@@ -242,6 +253,7 @@
                 <p class="text">
                   {{ derivative.description }}
                 </p>
+
               </div>
             </div>
             <!-- <div class="tw-mb-20 tw-flex tw-flex-wrap tw-gap-2.5 xl:tw-hidden">
@@ -327,6 +339,7 @@
                 </div>
               </div>
             </div>
+
           </q-carousel-slide>
         </q-carousel>
       </div>
@@ -439,7 +452,9 @@ const i18n = {
     },
     "ru-RU": {
       buy: "Купить",
+
       titleSidebar: "Деривативы",
+
       indexderivatives: {
         title: "Индексные деривативы",
         time: "с {from} по {to}",
@@ -556,6 +571,9 @@ export default {
   setup() {
     const slide = ref(1);
     const store = useStore();
+    const carousel = ref();
+    const next = () => carousel.value.next();
+    const prev = () => carousel.value.previos();
     const { charts, getChart } = useChart();
     const showedIndexId = ref(null);
 
@@ -574,6 +592,7 @@ export default {
     const { popup, isPopup, popupContent, buy, popupAction } =
       useBuyWidthdrawalPopup();
     const { t } = useI18n(i18n);
+
     const typeDirevative = ref("ALGA");
     const typesDirevative = ["ALGA", "Market", "Fund", "KOL’s"];
     const derivatives = computed(() => {
@@ -623,7 +642,6 @@ export default {
           if (item.id === 21 || item.id === 22) return item;
         });
     });
-
     watch(
       () => derivatives.value,
       (val) => setTimeout(() => (slide.value = val[0].id), 0)
@@ -669,6 +687,7 @@ export default {
       typeDirevative,
       typesDirevative,
       selectTypeDirevatives,
+
       showedIndexId,
     };
   },
@@ -684,6 +703,73 @@ export default {
 
 <style lang="scss">
 //$
+
+.accordion {
+  &__head {
+    @apply tw-flex tw-items-center tw-justify-between  tw-px-9 tw-py-3.5 tw-w-full;
+    background: #262d34;
+  }
+  &__body {
+    @apply tw-grid  tw-overflow-hidden tw-my-0;
+    @apply tw-transition-all tw-duration-300 tw-ease-out;
+    grid-template-rows: 0fr;
+    .child {
+      @apply tw-min-h-0;
+    }
+  }
+  .icon {
+    @apply tw-transition-transform tw-duration-300 tw-ease-out;
+  }
+  &.active &__head {
+    background: #0a8f2d;
+  }
+  &.active .icon {
+    @apply tw-transform tw-rotate-180;
+  }
+  &.active &__body {
+    grid-template-rows: 1fr;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}
+.content-page {
+  @screen xl {
+    display: grid;
+    grid-template-columns: 257px 1fr;
+  }
+
+  .item-chart {
+    @apply tw-grid tw-grid-cols-2  tw-px-9 tw-py-3.5 tw-w-full;
+    &:hover,
+    &.active {
+      background: #171d26;
+      box-shadow: 0px 99.7167px 39.8867px rgba(1, 3, 24, 0.01),
+        0px 55.97px 33.4533px rgba(1, 3, 24, 0.05),
+        0px 25.09px 25.09px rgba(1, 3, 24, 0.09),
+        0px 6.43333px 13.51px rgba(1, 3, 24, 0.1),
+        0px 0px 0px rgba(1, 3, 24, 0.1);
+    }
+  }
+}
+.index-directive {
+  .text {
+    max-width: 539px;
+  }
+}
+.slide-button {
+  cursor: pointer;
+  opacity: 0.5;
+  width: 60px;
+  height: 60px;
+  transition: opacity 0.2s ease;
+  @include screen-xl {
+    width: 40px;
+    height: 40px;
+  }
+  &.active {
+    opacity: 1;
+  }
+}
 
 .inside {
   display: flex;

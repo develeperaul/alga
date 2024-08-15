@@ -130,6 +130,7 @@
           </div>
         </Form>
       </div>
+
       <div class="profile-step__item tw-mt-5" v-if="referralLink">
         <div class="tw-text-purple-dark">{{ t("ref-title") }}</div>
         <div>
@@ -143,6 +144,7 @@
         </button>
       </div>
       <base-button @click.prevent="$app.logout"  class=" tw-mt-5"> {{ t("exit") }}</base-button>
+
     </div>
   </section>
   </q-page>
@@ -183,8 +185,10 @@ const i18n = {
       "change-password": "Change Password",
       "change-phone": "Change Phone",
       "phone-title": "New Phone Number",
+
       "ref-title": "Referral link",
-      exit:'Exit',
+      
+      exit:'Logout',
       phone: {
         label: "Phone number",
       },

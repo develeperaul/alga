@@ -330,6 +330,7 @@
         </div>
       </div>
       <div class="xl:tw-w-1/2">
+
         <div class="chart-card tw-mb-8" v-if="charts.length > 0">
           <div class="btns btns_sm">
             <!-- <button
@@ -373,6 +374,7 @@
             class="tw-order-2 xl:tw-order-1"
           />
         </div>
+
         <Swap :derivatives="derivatives" :currentList="indexList" />
       </div>
     </div>

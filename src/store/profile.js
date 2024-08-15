@@ -206,9 +206,11 @@ export default {
     async widthdrawalIndex(_c, obj) {
       await ProfileAPI.widthdrawalIndex(obj);
     },
+
     async swapIndex(_c,obj){
       console.log(obj);
       await ProfileAPI.swap(obj)
+
     },
     async buyIndex(_c, obj) {
       const { data } = await ProfileAPI.createOrder(obj);
