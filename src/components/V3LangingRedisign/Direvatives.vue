@@ -1,158 +1,161 @@
 <template>
-<section class="section index-directive">
-      <div class="tw-container">
-        <h2 class="title xl:tw-mb-14">{{ t("indexD.title") }}</h2>
-        <!-- cards -->
-        <div class=" tw-flex xl:tw-gap-5 tw-gap-3 tw-mt-5">
-          <base-button
-                  v-for="item in typesDirevative"
-                  class="button button__dense "
-                  :design="typeDirevative === item ? 'green': 'border'"
-                  @click="selectTypeDirevatives(item)"
-                >
-                {{ item }}
-                </base-button>
-        </div>
-        <div class="mob-n">
-          <div class="index-directive__cards tw-mt-10">
-            <div
-              class="card card_border card-derivative"
-              v-for="derivative in derivatives"
-              :key="derivative.id"
-            >
-              <div class="tw-flex tw-gap-3.5 tw-items-center">
-                <div class="circle tw-flex-shrink-0">
-                  <img :src="derivative.image.url" alt="" />
-                </div>
-                <h4 class=" tw-text-sm">{{ derivative.name }}</h4>
+  <section class="section index-directive">
+    <div class="tw-container">
+      <h2 class="title xl:tw-mb-14">{{ t("indexD.title") }}</h2>
+      <!-- cards -->
+      <div class="tw-flex xl:tw-gap-5 tw-gap-3 tw-mt-5">
+        <base-button
+          v-for="item in typesDirevative"
+          class="button button__dense"
+          :design="typeDirevative === item ? 'green' : 'border'"
+          @click="selectTypeDirevatives(item)"
+        >
+          {{ item }}
+        </base-button>
+      </div>
+      <div class="mob-n">
+        <div class="index-directive__cards tw-mt-10">
+          <div
+            class="card card_border card-derivative"
+            v-for="derivative in derivatives"
+            :key="derivative.id"
+          >
+            <div class="tw-flex tw-gap-3.5 tw-items-center">
+              <div class="circle tw-flex-shrink-0">
+                <img :src="derivative.image.url" alt="" />
               </div>
-              <p class="tw-mt-2.5 tokens tw-overflow-auto">
-                <template
-                  v-for="currency in derivative.currency_shares"
-                  :key="derivative.id + '_' + currency.id"
-                >
-                  {{ currency.code }} &nbsp;
-                </template>
-              </p>
-              <!-- index_derivative_id: -->
-              <div
-                class="tw-mt-5 tw-flex tw-justify-between"
-                v-if="getChart(derivative.id)"
+              <h4 class="tw-text-sm">{{ derivative.name }}</h4>
+            </div>
+            <p class="tw-mt-2.5 tokens tw-overflow-auto">
+              <template
+                v-for="currency in derivative.currency_shares"
+                :key="derivative.id + '_' + currency.id"
               >
-                <div>
-                  <p
-                    class="tw-text-white"
-                    v-html="t('indexD.card.profitability.1', { numb: '1' })"
-                  ></p>
-                  <div class="tw-flex tw-gap-x-2.5">
-                    <MarkIcon :mark="getChart(derivative.id)?.profitability" />
-                    <h4>{{ getChart(derivative.id)?.profitability }}%</h4>
-                  </div>
+                {{ currency.code }} &nbsp;
+              </template>
+            </p>
+            <!-- index_derivative_id: -->
+            <div
+              class="tw-mt-5 tw-flex tw-justify-between"
+              v-if="getChart(derivative.id)"
+            >
+              <div>
+                <p
+                  class="tw-text-white"
+                  v-html="t('indexD.card.profitability.1', { numb: '1' })"
+                ></p>
+                <div class="tw-flex tw-gap-x-2.5">
+                  <MarkIcon :mark="getChart(derivative.id)?.profitability" />
+                  <h4>{{ getChart(derivative.id)?.profitability }}%</h4>
                 </div>
-                <div>
-                  <MiniAreaChart :values="getChartData(derivative.id)" />
+              </div>
+              <div>
+                <MiniAreaChart :values="getChartData(derivative.id)" />
 
-                  <button
-                    @click="stage2"
-                    class="tw-mt-2 tw-flex tw-gap-1.5 tw-items-center"
-                  >
-                    <span class="buy">{{ t("other.button.buy") }}</span>
-                    <img src="./icons/button-arrow.svg" alt="" />
-                  </button>
-                </div>
+                <button
+                  @click="stage2"
+                  class="tw-mt-2 tw-flex tw-gap-1.5 tw-items-center"
+                >
+                  <span class="buy">{{ t("other.button.buy") }}</span>
+                  <img src="./icons/button-arrow.svg" alt="" />
+                </button>
               </div>
             </div>
-            <!-- card -->
           </div>
-        </div>
-        <div class="desk-n">
-          <div class="index-directive__cards">
-            <!-- card -->
-            
-            <q-carousel
-              v-model="slideIndex"
-              transition-prev="scale"
-              transition-next="scale"
-              swipeable
-              animated
-              navigation
-              padding
-              class="bg-transparent"
-            >
-              <template
-                v-slot:navigation-icon="{ index, active, btnProps, onClick }"
-              >
-                <button
-                  class="slide-paginate active"
-                  v-if="active"
-                  @click="onClick"
-                >
-                  {{ index + 1 }}
-                </button>
-                <button class="slide-paginate" v-else @click="onClick">
-                  {{ index + 1 }}
-                </button>
-              </template>
-
-              <q-carousel-slide
-                v-for="derivative in derivatives"
-                :key="derivative.id"
-                :name="derivative.id"
-                class="column no-wrap flex-center"
-              >
-                <div class="card card_border card-derivative">
-                  <div class="tw-flex tw-gap-3.5 tw-items-center">
-                    <div class="circle tw-flex-shrink-0">
-                      <img src="./img/index-icon_1.png" alt="" />
-                    </div>
-                    <h4 class=" tw-text-sm">{{ derivative.name }}</h4>
-                  </div>
-                  <p class="tw-mt-2.5 tokens tw-overflow-auto">
-                    <template
-                      v-for="currency in derivative.currency_shares"
-                      :key="derivative.id + '_' + currency.id"
-                    >
-                      {{ currency.code }} &nbsp;
-                    </template>
-                  </p>
-                  <div
-                    class="tw-mt-5 tw-flex tw-justify-between"
-                    v-if="getChart(derivative.id)"
-                  >
-                    <div>
-                      <p
-                        class="tw-text-white"
-                        v-html="t('indexD.card.profitability.1', { numb: '1' })"
-                      ></p>
-                      <div class="tw-flex tw-gap-x-2.5">
-                        <MarkIcon
-                          :mark="getChart(derivative.id)?.profitability"
-                        />
-                        <h4>{{ getChart(derivative.id)?.profitability }}%</h4>
-                      </div>
-                    </div>
-                    <div>
-                      <MiniAreaChart :values="getChartData(derivative.id)" />
-
-                      <button
-                        @click="stage2"
-                        class="tw-mt-2 tw-flex tw-gap-1.5 tw-items-center"
-                      >
-                        <span class="buy">{{ t("other.button.buy") }}</span>
-                        <img src="./icons/button-arrow.svg" alt="" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </q-carousel-slide>
-            </q-carousel>
-          </div>
+          <!-- card -->
         </div>
       </div>
-    </section>
+      <div class="desk-n">
+        <div class="index-directive__cards">
+          <!-- card -->
+
+          <q-carousel
+            v-model="slideIndex"
+            ref="derivativesSlider"
+            transition-prev="scale"
+            transition-next="scale"
+            swipeable
+            animated
+            navigation
+            padding
+            keep-alive
+            class="bg-transparent"
+            :key="typeDirevative"
+          >
+            <template
+              v-slot:navigation-icon="{ index, active, btnProps, onClick }"
+            >
+              <button
+                class="slide-paginate active"
+                v-if="active"
+                @click="onClick"
+              >
+                {{ index + 1 }}
+              </button>
+              <button class="slide-paginate" v-else @click="onClick">
+                {{ index + 1 }}
+              </button>
+            </template>
+
+            <q-carousel-slide
+              v-for="(derivative, index) in derivatives"
+              :key="derivative.id"
+              :name="index"
+              class="column no-wrap flex-center"
+            >
+              <div class="card card_border card-derivative">
+                <div class="tw-flex tw-gap-3.5 tw-items-center">
+                  <div class="circle tw-flex-shrink-0">
+                    <img src="./img/index-icon_1.png" alt="" />
+                  </div>
+                  <h4 class="tw-text-sm">{{ derivative.name }}</h4>
+                </div>
+                <p class="tw-mt-2.5 tokens tw-overflow-auto">
+                  <template
+                    v-for="currency in derivative.currency_shares"
+                    :key="derivative.id + '_' + currency.id"
+                  >
+                    {{ currency.code }} &nbsp;
+                  </template>
+                </p>
+                <div
+                  class="tw-mt-5 tw-flex tw-justify-between"
+                  v-if="getChart(derivative.id)"
+                >
+                  <div>
+                    <p
+                      class="tw-text-white"
+                      v-html="t('indexD.card.profitability.1', { numb: '1' })"
+                    ></p>
+                    <div class="tw-flex tw-gap-x-2.5">
+                      <MarkIcon
+                        :mark="getChart(derivative.id)?.profitability"
+                      />
+                      <h4>{{ getChart(derivative.id)?.profitability }}%</h4>
+                    </div>
+                  </div>
+                  <div>
+                    <MiniAreaChart :values="getChartData(derivative.id)" />
+
+                    <button
+                      @click="stage2"
+                      class="tw-mt-2 tw-flex tw-gap-1.5 tw-items-center"
+                    >
+                      <span class="buy">{{ t("other.button.buy") }}</span>
+                      <img src="./icons/button-arrow.svg" alt="" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </q-carousel-slide>
+          </q-carousel>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
-<script >
-import { ref, computed } from "vue";
+<script>
+import { ref, computed, watch } from "vue";
 import { useStore } from "vuex";
 import useChart from "src/composition/useChart.js";
 import { useI18n } from "vue-i18n";
@@ -821,49 +824,103 @@ const i18n = {
 export default {
   components: {
     MiniAreaChart,
-    MarkIcon
+    MarkIcon,
   },
   props: {
-    charts: Array
+    charts: Array,
   },
-  setup(props){
+  setup(props) {
     const $i18n = useI18n();
     const { t } = useI18n(i18n);
     const store = useStore();
+    const derivativesSlider = ref(null);
+    const slideIndex = ref(0);
+    const typeDirevative = ref("ALGA");
+    const typesDirevative = ["ALGA", "Market", "Fund", "KOL’s"];
     const derivatives = computed(() => {
-      const arr = store.getters["landing/derivatives"]
-      if(typeDirevative.value === 'ALGA') return arr.slice(0,5)
-      if(typeDirevative.value === 'Market')return arr.slice(5)
-      
+      const arr = store.getters["landing/derivatives"];
+
+      if (typeDirevative.value === "ALGA")
+        return arr.filter((item) => {
+          if (
+            item.id === 1 ||
+            item.id === 2 ||
+            item.id === 3 ||
+            item.id === 4 ||
+            item.id === 5 ||
+            item.id === 15 ||
+            item.id === 16 ||
+            item.id === 17
+          )
+            return item;
+        });
+      if (typeDirevative.value === "Market")
+        return arr.filter((item) => {
+          if (
+            item.id === 1 ||
+            item.id === 2 ||
+            item.id === 3 ||
+            item.id === 4 ||
+            item.id === 5 ||
+            item.id === 15 ||
+            item.id === 16 ||
+            item.id === 17 ||
+            item.id === 18 ||
+            item.id === 19 ||
+            item.id === 20 ||
+            item.id === 21 ||
+            item.id === 22
+          )
+            return;
+          return item;
+        });
+
+      if (typeDirevative.value === "Fund")
+        return arr.filter((item) => {
+          if (item.id === 18 || item.id === 19 || item.id === 20) return item;
+        });
+
+      if (typeDirevative.value === "KOL’s")
+        return arr.filter((item) => {
+          if (item.id === 21 || item.id === 22) return item;
+        });
     });
-    
-    const typeDirevative = ref('ALGA')
-    const typesDirevative = ['ALGA', 'Market']
+
+    watch(typeDirevative, (val) => {
+      derivativesSlider.value?.goTo(0);
+
+      console.log(derivativesSlider);
+    });
+
     const getChart = (id) => {
-    if (props.charts) {
-      return props.charts.find((chart) => chart["index_derivative_id"] === id);
-    }
-  };
-    const getChartData = (id) => {
-        return getChart(id)?.chart.map((item) => [
-          +item.timestamp * 1000,
-          +item.value,
-        ]);
-      };
-    const selectTypeDirevatives = (type)=>{
-      typeDirevative.value= type
-    }
-      return {
-        derivatives,
-        getChart,
-        getChartData,
-        t,
-        typeDirevative,
-        typesDirevative,
-        selectTypeDirevatives,
-        slideIndex: ref(1),
+      if (props.charts) {
+        return props.charts.find(
+          (chart) => chart["index_derivative_id"] === id
+        );
       }
-  }
-}
+    };
+    const getChartData = (id) => {
+      return getChart(id)?.chart.map((item) => [
+        +item.timestamp * 1000,
+        +item.value,
+      ]);
+    };
+    const selectTypeDirevatives = (type) => {
+      typeDirevative.value = type;
+    };
+    return {
+      derivatives,
+      getChart,
+      getChartData,
+      t,
+      typeDirevative,
+      typesDirevative,
+      selectTypeDirevatives,
+      slideIndex,
+
+      derivativesSlider,
+    };
+  },
+};
 </script>
 <style src="./style.scss" lang="scss" scoped></style>

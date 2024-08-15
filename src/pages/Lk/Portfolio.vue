@@ -4,7 +4,7 @@
   >
     <div class="xl:tw-flex tw-justify-between tw-mb-14">
       <h2 class="tw-mb-3 xl:tw-mb-0">{{ t("title") }}</h2>
-      <div class="tw-flex-wrap tw-justify-end tw-flex tw-gap-3 xl:tw-gap-14">
+      <!-- <div class="tw-flex-wrap tw-justify-end tw-flex tw-gap-3 xl:tw-gap-14">
         <div>
           <div
             class="tw-text-xxs-1 tw-text-gray tw-flex tw-items-center tw-justify-end tw-gap-1.5 tw-mb-4"
@@ -45,7 +45,7 @@
             <span class="tw-text-green"> 0% </span>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="tw-grid xl:tw-flex tw-gap-6.25">
       <div class="xl:tw-w-1/2">
@@ -112,12 +112,7 @@
                 :mark="balance.is_profit_positive ? 1 : -1"
                 class="tw-w-2"
               />
-              ${{
-                (
-                  (+balance.relative_profit * 100) /
-                  +balance.actual_balance
-                ).toFixed(2)
-              }}
+              ${{ (+balance.relative_profit).toFixed(2) }}
             </span>
             <span
               class="tw-text-xxs"
@@ -128,7 +123,12 @@
               ]"
               v-if="balance.relative_profit"
               >{{ balance.is_profit_positive ? "+" : "-" }}
-              {{ (+balance.relative_profit).toFixed(2) }}%
+              {{
+                (
+                  (+balance.relative_profit * 100) /
+                  +balance.actual_balance
+                ).toFixed(2)
+              }}%
             </span>
           </div>
         </div>
@@ -330,6 +330,51 @@
         </div>
       </div>
       <div class="xl:tw-w-1/2">
+
+        <div class="chart-card tw-mb-8" v-if="charts.length > 0">
+          <div class="btns btns_sm">
+            <!-- <button
+              class="tw-px-4 tw-h-full"
+              :class="{ active: activeChart === 1 }"
+              @click="newTime(2) activeChart = 1"
+            >
+              H
+            </button> -->
+            <button
+              class="tw-px-4 tw-h-full"
+              :class="{ active: activeChart === 2 }"
+              @click="newTime(2, 2)"
+            >
+              D
+            </button>
+            <button
+              class="tw-px-4 tw-h-full"
+              :class="{ active: activeChart === 3 }"
+              @click="newTime(3, 7)"
+            >
+              W
+            </button>
+            <button
+              class="tw-px-4 tw-h-full"
+              :class="{ active: activeChart === 4 }"
+              @click="newTime(4, 30)"
+            >
+              M
+            </button>
+            <button
+              class="tw-px-4 tw-h-full"
+              :class="{ active: activeChart === 5 }"
+              @click="newTime(5, 120)"
+            >
+              Y
+            </button>
+          </div>
+          <AreaChart
+            :valSeries="getChartData(1)"
+            class="tw-order-2 xl:tw-order-1"
+          />
+        </div>
+
         <Swap :derivatives="derivatives" :currentList="indexList" />
       </div>
     </div>
@@ -347,7 +392,7 @@
         ref="popup"
       >
         <template v-if="popupContent.popup_name === 'widthdrawal'">
-          <div class="tw-text-lg tw-leading-snug xl:tw-text-md2 tw-mb-2.5">
+          <div class=" tw-text-md1 g tw-leading-snug xl:tw-text-md2 tw-mb-2.5">
             {{ t("popup.title") }}
           </div>
           <p class="tw-text-purple-dark tw-text-base xl:tw-text-sm tw-mb-5">
@@ -382,7 +427,7 @@
           </Form>
         </template>
         <template v-else-if="popupContent.popup_name === 'buy'">
-          <div class="tw-text-lg tw-leading-snug xl:tw-text-md2 tw-mb-2.5">
+          <div class="tw-text-md1  tw-leading-snug xl:tw-text-md2 tw-mb-2.5">
             {{ t("popup.titleBuy") }}
           </div>
           <Form
@@ -466,7 +511,7 @@ const i18n = {
     },
     "en-US": {
       monthly_change: "Monthly change",
-      title: "My Prortfolio",
+      title: "My Portfolio",
       card: {
         title: "Balance",
       },

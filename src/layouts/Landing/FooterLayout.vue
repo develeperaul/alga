@@ -61,46 +61,27 @@
           class="xl:tw-order-2 tw-grid tw-grid-cols-2 xl:tw-flex tw-gap-8 tw-mb-4 xl:tw-mb-0"
         >
           <div>
-            <div class="tw-mb-5">{{ t("learnMore.title") }}</div>
-            <div class="links tw-flex tw-flex-col tw-gap-3.5">
-              <a href="#">{{ t("learnMore.list[0]") }}</a>
-              <a href="#">{{ t("learnMore.list[1]") }}</a>
-              <a href="#">{{ t("learnMore.list[2]") }}</a>
-            </div>
-          </div>
-          <div>
             <div class="tw-mb-5">{{ t("platform.title") }}</div>
             <div class="links tw-flex tw-flex-col tw-gap-3.5">
-              <span @click="$router.push({ name: 'profile' })">{{
-                t("platform.list[0]")
-              }}</span>
-              <a href="#">{{ t("platform.list[1]") }}</a>
-              <span @click="$router.push({ name: 'portfolio' })">{{
-                t("platform.list[2]")
-              }}</span>
-              <span
-                @click="$router.push({ name: 'index-directive' })"
-                v-html="t('platform.list[3]')"
-              ></span>
-            </div>
-          </div>
-          <div>
-            <div class="tw-mb-5">{{ t("company.title") }}</div>
-            <div class="links tw-flex tw-flex-col tw-gap-3.5">
-              <span @click="$router.push({ name: 'home' })">{{
-                t("company.list[0]")
-              }}</span>
-              <span @click="$router.push({ name: 'about' })">{{
-                t("company.list[1]")
-              }}</span>
-              
+              <router-link :to="{ name: 'howitworks' }">
+                {{ t("platform.list[0]") }}
+              </router-link>
+              <router-link :to="{ name: 'roadmap' }">
+                {{ t("platform.list[1]") }}
+              </router-link>
+              <router-link :to="{ name: 'tokenomics' }">
+                {{ t("platform.list[2]") }}
+              </router-link>
+              <router-link :to="{ name: 'user-agreement' }">
+                {{ t("platform.list[3]") }}
+              </router-link>
             </div>
           </div>
           <div>
             <div class="tw-mb-5">{{ t("ourCommunities.title") }}</div>
             <div class="links tw-flex tw-flex-col tw-gap-3.5">
-              <a href="#"> 🇺🇸 English </a>
-              <a href="#"> 🇷🇺 Russian </a>
+              <a :href="links[0].href" target="_blank"> 🇺🇸 English </a>
+              <a :href="links[0].href" target="_blank"> 🇷🇺 Russian </a>
             </div>
           </div>
         </div>
@@ -194,10 +175,10 @@
               </svg>
             </a>
 
-            <div
-              @click="choiceLink('telegram')"
+            <a
               class="tw-cursor-pointer"
               data-link
+              :href="links[0].href"
             >
               <svg
                 width="29"
@@ -246,7 +227,7 @@
                   </clipPath>
                 </defs>
               </svg>
-            </div>
+            </a>
 
             <a href="https://twitter.com/algaecosystem" target="_blank">
               <svg
@@ -298,7 +279,7 @@
               </svg>
             </a>
 
-            
+
           </div>
           <div class="dates tw-text-center xl:tw-text-left">
             © 2021-{{ new Date().getFullYear() }} ALGA.
@@ -323,10 +304,10 @@ const i18n = {
       platform: {
         title: "Платформа",
         list: [
-          "Профиль",
-          "Трейдинг",
-          "Портфолио",
-          "Производные <br/> индексы <br/> токенов",
+          "Как работает проект",
+          "Дорожная карта",
+          "Токеномика",
+          "Пользовательское соглашение",
         ],
       },
       company: {
@@ -348,10 +329,10 @@ const i18n = {
       platform: {
         title: "Platform",
         list: [
-          "Profile",
-          "Trading",
-          "Portfolio",
-          "Index <br/> derivaties",
+          "How project work",
+          "Road map",
+          "Tokenomics",
+          "User agreement",
         ],
       },
       company: {
@@ -373,7 +354,7 @@ const links = ref([
     name: "telegram",
     icon: "telegram",
     title: t("links.telegram[0]"),
-    href: "https://t.me/algafinance",
+    href: "https://t.me/algafinancechat_ru",
   },
   {
     name: "telegram",

@@ -12,10 +12,10 @@ export function login({ email, password }) {
     .json();
 }
 
-export function registr({ cellphone, email, name }) {
+export function registr({ cellphone, email, name, referral_code }) {
   return MainApi.mainKy
     .post("b2c/auth/register", {
-      json: { cellphone, email, name },
+      json: { cellphone, email, name, referral_code },
     })
     .json();
 }

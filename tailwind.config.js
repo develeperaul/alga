@@ -1,12 +1,12 @@
 module.exports = {
   prefix: "tw-",
   purge: {
-    content: ["./src/**/*.vue"],
+    content: ["./src/**/*.vue", './src/**/*.js'],
   },
   // darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      
+
       gridTemplateRows: {
         '1_auto': "1fr auto"
       },

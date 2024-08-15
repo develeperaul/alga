@@ -83,9 +83,10 @@ const closeSelect = (e) => {
 };
 onMounted(() => (selected.val = props.modelValue));
 watch(selected, (val) => {
-  console.log(emit("update:modelValue", val));
   emit("update:modelValue", val);
 });
+
+watch(()=>props.modelValue,(val)=>selected.value=val)
 </script>
 <style lang="scss" scoped>
 .select {
@@ -114,6 +115,7 @@ watch(selected, (val) => {
       @apply tw-grid  tw-overflow-auto;
       @apply tw-min-h-0;
       max-height: 170px;
+      width: 100%;
       & > div {
         @apply tw-px-5 tw-py-2 tw-cursor-pointer;
         font-size: 0.625rem;

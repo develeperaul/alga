@@ -3,22 +3,7 @@ import { markAuth } from "./utilities/auth";
 // layouts/V4/Baselayout.vue
 // layouts/GuestLayout.vue
 const routes = [
-  // {
-  //   path: "/",
-  //   component: () => import("layouts/Landing/BaseLayout.vue"),
-  //   children: [
-  //     {
-  //       path: "",
-  //       component: () => import("pages/Landing.vue"),
-  //       name: "home",
-  //     },
-  //     {
-  //       path: "/about",
-  //       component: () => import("pages/About.vue"),
-  //       name: "about",
-  //     }
-  //   ],
-  // },
+
 
   {
     path: "/",
@@ -44,6 +29,16 @@ const routes = [
           path: "",
           component: () => import("pages/Lk/Portfolio.vue"),
           name: "portfolio",
+        },
+        {
+          path: "referals",
+          component: () => import("pages/Lk/Referrals.vue"),
+          name: "referals",
+        },
+        {
+          path: "output-bonuses",
+          component: () => import("pages/Lk/OutputBonuses.vue"),
+          name: "output-bonuses",
         },
         {
           path: "support",
@@ -86,7 +81,7 @@ const routes = [
     ],
   },
 
-  
+
 
   // Always leave this as last one,
   // but you can also remove it

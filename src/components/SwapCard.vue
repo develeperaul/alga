@@ -8,17 +8,10 @@
         <span class="tw-text-text-gray"> {{ t("from") }} </span>
       </div>
       <div class="field-select">
-        <input
-          type="number"
-          name="inp1"
-          placeholder="0.00"
-          disabled
-          v-model="inp"
-        />
-        <div
-          class="tw-absolute tw-top-0 tw-right-0"
-          v-if="currentList.length > 0"
-        >
+
+        <input type="number" name="inp1" placeholder="0.00" disabled v-model="inp" />
+        <div class="tw-absolute tw-top-0 tw-right-0" v-if="currentList.length > 0">
+
           <base-select2 :options="opts1" v-model="select1" />
         </div>
       </div>
@@ -29,17 +22,10 @@
         <span class="tw-text-text-gray"> {{ t("to") }} </span>
       </div>
       <div class="field-select">
-        <input
-          type="number"
-          name="inp2"
-          placeholder="0.00"
-          disabled
-          v-model="inp"
-        />
-        <div
-          class="tw-absolute tw-top-0 tw-right-0"
-          v-if="currentList.length > 0 && opts2.length > 0"
-        >
+
+        <input type="number" name="inp2" placeholder="0.00" disabled v-model="inp" />
+        <div class="tw-absolute tw-top-0 tw-right-0" v-if="currentList.length > 0 && opts2.length > 0">
+
           <base-select2 :options="opts2" v-model="select2" />
         </div>
       </div>
@@ -48,7 +34,9 @@
     <div class="tw-flex tw-justify-end tw-mt-10">
       <button
         type="submit"
-        :disabled="!(select1 !== null && select2 !== null)"
+
+        :disabled="!(select1 !== null && select2 !== null )"
+
         class="tw-bg-title-light tw-text-white tw-rounded-xl tw-px-12 tw-h-12 tw-flex tw-items-center tw-justify-center tw-gap-2"
       >
         <svg
@@ -99,8 +87,9 @@ import { useStore } from "vuex";
 import { computed, ref, watch } from "vue";
 const props = defineProps({
   derivatives: Array,
-  currentList: Array,
-});
+
+  currentList: Array
+
 
 const i18n = {
   messages: {
@@ -119,16 +108,19 @@ const i18n = {
 const { t } = useI18n(i18n);
 const isPopup = ref(false);
 
-const targetModal = (e) => {
-  if (e.target === modal.value) isPopup.value = false;
-};
-const modal = ref();
+
+const targetModal = (e)=>{
+  if(e.target === modal.value) isPopup.value = false
+}
+const modal = ref()
+
 const inp = ref("");
 const select1 = ref(null);
 const inp1 = ref("");
 const select2 = ref(null);
 const inp2 = ref("");
 const opts1 = computed(() => {
+
   const newArr = props.currentList?.map((item) => {
     return {
       id: item.inder.id,
@@ -136,15 +128,17 @@ const opts1 = computed(() => {
       label: item.inder.name,
     };
   });
-  return newArr;
+
+  return newArr
 });
-const swap = async (v) => {
+const swap = async(v) => {
   try {
     await store.dispatch("profile/swapIndex", {
-      inder_in_id: select1.value.id,
-      inder_out_id: select2.value.id,
+      "inder_in_id": select1.value.id,
+      "inder_out_id": select2.value.id
     });
-    await store.dispatch("profile/listPortfolioData");
+    await store.dispatch("profile/listPortfolioData")
+
     isPopup.value = true;
   } catch (e) {
     throw e;
@@ -153,7 +147,9 @@ const swap = async (v) => {
 const store = useStore();
 
 const opts2 = computed(() => {
-  if (select1.value) {
+
+  if(select1.value){
+
     const newArr = props.derivatives?.map((item) => {
       return {
         id: item.id,
@@ -167,23 +163,27 @@ const opts2 = computed(() => {
           return item.id !== select1.value.id;
         })
       : [];
-  }
-  return [];
+
+
+  } return []
+
 });
 watch(isPopup, (val) => {
   // if(val) window.addEventListener('click',targetModal)
   // else window.addEventListener('click',targetModal)
-});
 
-watch(select1, (val) => {
-  const current = props.currentList.find((item) => {
-    console.log(item.inder.id, val.id);
-    return item.inder.id === val.id;
-  });
-  inp.value = Number(current.total.actual_amount).toFixed(2);
-  // inp.value =
-  select2.value = null;
-});
+})
+
+watch(select1,(val)=>{
+  const current = props.currentList.find(item=>{
+    console.log(item.inder.id , val.id);
+    return item.inder.id === val.id
+  })
+  inp.value = Number(current.total.actual_amount).toFixed(2)
+  // inp.value = 
+  select2.value=null
+})
+
 </script>
 <style lang="scss" scoped>
 .swap-card {

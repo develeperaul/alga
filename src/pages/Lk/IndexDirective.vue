@@ -6,7 +6,9 @@
     >
       <div class="tw-overflow-auto">
         <h4 class="tw-px-9 tw-py-8">{{ t("titleSidebar") }}:</h4>
-        <div class="tw-grid tw-gap-6">
+
+        <div class="tw-grid tw-mb-4">
+
           <div
             v-for="item in typesDirevative"
             class="accordion"
@@ -102,6 +104,8 @@
 
       <div
         class="tw-flex xl:tw-hidden tw-justify-center xl:tw-gap-5 tw-gap-3 tw-mb-5"
+
+
       >
         <base-button
           v-for="item in typesDirevative"
@@ -112,28 +116,89 @@
           {{ item }}
         </base-button>
       </div>
-
-      <q-carousel
-        swipeable
-        animated
-        v-model="slide"
-        ref="carousel"
-        class="bg-transparent"
-        height="100%"
-        :padding="false"
-      >
-        <q-carousel-slide
-          v-for="derivative in derivatives"
-          :key="derivative.id"
-          :name="derivative.id"
-        >
+      <div class="desk-n">
+        <div class="tw-grid tw-gap-4">
           <div
-            class="tw-mb-7.5 xl:tw-mb-10 index-directive tw-grid xl:tw-flex tw-items-center tw-gap-8"
+            class="card card_border card-derivative"
+            v-for="derivative in derivatives"
+            :key="derivative.id"
+            @click="showedIndexId = derivative.id"
           >
-            <div class="tw-flex tw-items-center">
-              <q-btn round @click="prev">
-                <q-icon name="arrow_back_ios" />
-              </q-btn>
+
+            <IndexDetailedModal
+              ref="detailed"
+              :showed="derivative.id === showedIndexId"
+              @update:showed="showedIndexId = null"
+              :derivative="derivative"
+              :round-diagram="{
+                values: roundDiagramData(derivative['currency_shares']),
+                colors: roundDiagramColors(derivative['currency_shares']),
+              }"
+            />
+            <div class="tw-flex tw-gap-3.5 tw-items-center">
+              <div class="circle tw-flex-shrink-0">
+                <img :src="derivative.image.url" alt="" />
+              </div>
+              <h4 class="tw-text-sm">{{ derivative.name }}</h4>
+            </div>
+            <div class="tw-overflow-hidden tw-max-w-[77vw]">
+              <p class="tw-mt-2.5 tokens tw-overflow-auto">
+                <template
+                  v-for="currency in derivative.currency_shares"
+                  :key="derivative.id + '_' + currency.id"
+                >
+                  {{ currency.code }} &nbsp;
+                </template>
+              </p>
+            </div>
+            <!-- index_derivative_id: -->
+            <div
+              class="tw-mt-5 tw-flex tw-justify-between"
+              v-if="getChart(derivative.id)"
+            >
+              <div>
+                <p
+                  class="tw-text-white"
+                  v-html="t('statistics.profitText', { numb: '1' })"
+                ></p>
+                <div class="tw-flex tw-gap-x-2.5">
+                  <MarkIcon :mark="getChart(derivative.id)?.profitability" />
+                  <h4>{{ getChart(derivative.id)?.profitability }}%</h4>
+
+                </div>
+              </div>
+              <div>
+                <base-button
+                  data-index
+
+                  @click.stop="stage2($event, derivative.id)"
+                  class="button tw-w-full xl:tw-w-auto"
+                  >{{ t("buy") }}</base-button
+                >
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mob-n">
+        <q-carousel
+          swipeable
+          animated
+          v-model="slide"
+          ref="carousel"
+          class="bg-transparent taul"
+          height="100%"
+          :padding="false"
+        >
+          <q-carousel-slide
+            v-for="derivative in derivatives"
+            :key="derivative.id"
+            :name="derivative.id"
+          >
+            <div
+              class="tw-mb-7.5 xl:tw-mb-10 index-directive tw-grid xl:tw-flex tw-items-center tw-gap-8"
+            >
               <div
                 style="width: 170px"
                 class="tw-justify-items-center tw-mx-auto"
@@ -153,129 +218,131 @@
                   </template>
                 </RoundDiagram>
               </div>
-              <q-btn round @click="next">
-                <q-icon name="arrow_forward_ios" />
-              </q-btn>
-            </div>
 
-            <div class="tw-flex-grow">
-              <div class="item tw-mb-5 tw-flex tw-justify-between">
-                <div class="tw-flex tw-gap-10 tw-items-center">
-                  <div class="tw-flex tw-flex-col">
-                    <h4>{{ derivative.name }}</h4>
-                    <p>
-                      {{
-                        t("indexderivatives.time", {
-                          from: derivative["opening_at"],
-                          to: derivative["closing_at"],
-                        })
-                      }}
-                    </p>
+
+              <div class="tw-flex-grow">
+                <div class="item tw-mb-5 tw-flex tw-justify-between">
+                  <div class="tw-flex tw-gap-10 tw-items-center">
+                    <div class="tw-flex tw-flex-col">
+                      <h4>{{ derivative.name }}</h4>
+                      <p>
+                        {{
+                          t("indexderivatives.time", {
+                            from: derivative["opening_at"],
+                            to: derivative["closing_at"],
+                          })
+                        }}
+                      </p>
+                    </div>
+
                   </div>
+                  <base-button
+                    data-index
+                    @click="stage2($event, derivative.id)"
+                    class="button tw-w-full tw-hidden xl:tw-block xl:tw-w-auto"
+                    >{{ t("buy") }}</base-button
+                  >
+
                 </div>
                 <base-button
                   data-index
                   @click="stage2($event, derivative.id)"
-                  class="button tw-w-full tw-hidden xl:tw-block xl:tw-w-auto"
+                  class="button tw-mb-4 tw-w-full xl:tw-hidden xl:tw-w-auto"
                   >{{ t("buy") }}</base-button
                 >
+                <p class="text">
+                  {{ derivative.description }}
+                </p>
+
               </div>
-              <base-button
-                data-index
-                @click="stage2($event, derivative.id)"
-                class="button tw-mb-4 tw-w-full xl:tw-hidden xl:tw-w-auto"
-                >{{ t("buy") }}</base-button
+            </div>
+            <!-- <div class="tw-mb-20 tw-flex tw-flex-wrap tw-gap-2.5 xl:tw-hidden">
+              <div
+                class="slide-button"
+                v-for="derivative in derivatives"
+                :key="derivative.id"
+                :class="{ active: slide === derivative.id }"
+                @click="slide = derivative.id"
               >
-              <p class="text">
-                {{ derivative.description }}
-              </p>
-            </div>
-          </div>
-          <div class="tw-mb-20 tw-flex tw-flex-wrap tw-gap-2.5 xl:tw-hidden">
-            <div
-              class="slide-button"
-              v-for="derivative in derivatives"
-              :key="derivative.id"
-              :class="{ active: slide === derivative.id }"
-              @click="slide = derivative.id"
-            >
-              <img :src="derivative.image.url" alt="" />
-            </div>
-          </div>
+                <img :src="derivative.image.url" alt="" />
+              </div>
+            </div> -->
 
-          <div>
-            <div class="inside tw-mb-10">
-              <div class="table">
-                <div class="table-head tw-mb-5">
-                  <h4 class="">
-                    {{ t("inside.title") }}
-                  </h4>
-                  <div class="head-items">
-                    <span></span>
-                    <span> cost </span>
-                    <span> alteration </span>
-                  </div>
-                </div>
-                <ul class="table-body coinlist">
-                  <li
-                    class="item tw-flex tw-justify-between tw-items-center"
-                    v-for="currency in derivative['currency_shares']"
-                    :key="derivative.id + '_' + currency.id"
-                  >
-                    <div class="tw-flex tw-gap-3-1 tw-items-center">
-                      <img
-                        :src="currency.image.url"
-                        alt="bitcoin"
-                        width="30"
-                        height="30"
-                        class="tw-rounded-full"
-                      />
-                      <span>{{ currency.name }}</span>
+            <div>
+              <div class="inside tw-mb-10">
+                <div class="table">
+                  <div class="table-head tw-mb-5">
+                    <h4 class="">
+                      {{ t("inside.title") }}
+                    </h4>
+                    <div class="head-items">
+                      <span></span>
+                      <span> cost </span>
+                      <span> alteration </span>
                     </div>
-                    <span>{{ currency["percent_share"] }}%</span>
-                    <span>{{ currency["percent_share"] }}%</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="tw-pb-10 statistics">
-              <div class="statistics__top">
-                <div class="tw-flex tw-justify-between">
-                  <!-- <div>{{ t("statistics.title") }}</div> -->
-                  <!-- <base-select
-                    :options="[
-                      {
-                        label: t('statistics.selectProfit', { numb: '1' }),
-                        id: 1,
-                      },
-                    ]"
-                  /> -->
+                  </div>
+                  <ul class="table-body coinlist">
+                    <li
+                      class="item tw-flex tw-justify-between tw-items-center"
+                      v-for="currency in derivative['currency_shares']"
+                      :key="derivative.id + '_' + currency.id"
+                    >
+                      <div class="tw-flex tw-gap-3-1 tw-items-center">
+                        <img
+                          :src="currency.image.url"
+                          alt="bitcoin"
+                          width="30"
+                          height="30"
+                          class="tw-rounded-full"
+                        />
+                        <span>{{ currency.name }}</span>
+                      </div>
+                      <span>{{ currency["percent_share"] }}%</span>
+                      <span>{{ currency["percent_share"] }}%</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
+              <div class="tw-pb-10 statistics">
+                <div class="statistics__top">
+                  <div class="tw-flex tw-justify-between">
+                    <!-- <div>{{ t("statistics.title") }}</div> -->
+                    <!-- <base-select
+                      :options="[
+                        {
+                          label: t('statistics.selectProfit', { numb: '1' }),
+                          id: 1,
+                        },
+                      ]"
+                    /> -->
+                  </div>
+                </div>
 
-              <div class="statistics__bottom" v-if="charts.length > 0">
-                <AreaChart
-                  :valSeries="getChartData(derivative.id)"
-                  class="tw-order-2 xl:tw-order-1"
-                  :key="derivative.id"
-                />
-                <div
-                  class="tw-flex tw-justify-between tw-items-center tw-order-1 xl:tw-block tw-mt-5 xl:tw-order-2"
-                >
+                <div class="statistics__bottom" v-if="charts.length > 0">
+                  <AreaChart
+                    :valSeries="getChartData(derivative.id)"
+                    class="tw-order-2 xl:tw-order-1"
+                    :key="derivative.id"
+                  />
                   <div
-                    class="tw-mb-2.5"
-                    v-html="t('statistics.profitText', { numb: '1' })"
-                  ></div>
-                  <div class="tw-text-md2 tw-flex tw-gap-x-2.5">
-                    <MarkIcon :mark="getChart(derivative.id).profitability" />
-                    {{ getChart(derivative.id).profitability }}%
+                    class="tw-flex tw-justify-between tw-items-center tw-order-1 xl:tw-block tw-mt-5 xl:tw-order-2"
+                  >
+                    <div
+                      class="tw-mb-2.5"
+                      v-html="t('statistics.profitText', { numb: '1' })"
+                    ></div>
+                    <div class="tw-text-md2 tw-flex tw-gap-x-2.5">
+                      <MarkIcon :mark="getChart(derivative.id).profitability" />
+                      {{ getChart(derivative.id).profitability }}%
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </q-carousel-slide>
-      </q-carousel>
+
+          </q-carousel-slide>
+        </q-carousel>
+      </div>
 
       <Transition
         appear
@@ -341,6 +408,8 @@ import { useStore } from "vuex";
 import useChart from "src/composition/useChart.js";
 import useChartData from "src/composition/V3/useChartData.js";
 import useBuyWidthdrawalPopup from "src/composition/V3/useBuyWidthdrawalPopup";
+import IndexDetailedModal from 'src/components/LK/Modal/IndexDetailed.vue';
+
 const i18n = {
   messages: {
     "en-US": {
@@ -383,7 +452,9 @@ const i18n = {
     },
     "ru-RU": {
       buy: "Купить",
-      titleSidebar: "Диревативы",
+
+      titleSidebar: "Деривативы",
+
       indexderivatives: {
         title: "Индексные деривативы",
         time: "с {from} по {to}",
@@ -495,6 +566,7 @@ export default {
     AreaChart,
     MarkIcon,
     MiniAreaChart,
+    IndexDetailedModal,
   },
   setup() {
     const slide = ref(1);
@@ -503,6 +575,8 @@ export default {
     const next = () => carousel.value.next();
     const prev = () => carousel.value.previos();
     const { charts, getChart } = useChart();
+    const showedIndexId = ref(null);
+
     const {
       btnMainData,
       ethMainData,
@@ -614,9 +688,7 @@ export default {
       typesDirevative,
       selectTypeDirevatives,
 
-      carousel,
-      next,
-      prev,
+      showedIndexId,
     };
   },
   methods: {
@@ -629,8 +701,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 //$
+
 .accordion {
   &__head {
     @apply tw-flex tw-items-center tw-justify-between  tw-px-9 tw-py-3.5 tw-w-full;
@@ -697,6 +770,7 @@ export default {
     opacity: 1;
   }
 }
+
 .inside {
   display: flex;
   flex-direction: column;
@@ -769,6 +843,84 @@ export default {
   }
 }
 
+.coinlist {
+  .item {
+    @include screen-xl {
+      width: 318px;
+    }
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+//$
+.accordion {
+  &__head {
+    @apply tw-flex tw-items-center tw-justify-between  tw-px-9 tw-py-3.5 tw-w-full;
+    background: #262d34;
+  }
+  &__body {
+    @apply tw-grid  tw-overflow-hidden tw-my-0;
+    @apply tw-transition-all tw-duration-300 tw-ease-out;
+    grid-template-rows: 0fr;
+    .child {
+      @apply tw-min-h-0;
+    }
+  }
+  .icon {
+    @apply tw-transition-transform tw-duration-300 tw-ease-out;
+  }
+  &.active &__head {
+    background: #0a8f2d;
+  }
+  &.active .icon {
+    @apply tw-transform tw-rotate-180;
+  }
+  &.active &__body {
+    grid-template-rows: 1fr;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+}
+.content-page {
+  @screen xl {
+    display: grid;
+    grid-template-columns: 257px 1fr;
+  }
+
+  .item-chart {
+    @apply tw-grid tw-grid-cols-2  tw-px-9 tw-py-3.5 tw-w-full;
+    &:hover,
+    &.active {
+      background: #171d26;
+      box-shadow: 0px 99.7167px 39.8867px rgba(1, 3, 24, 0.01),
+        0px 55.97px 33.4533px rgba(1, 3, 24, 0.05),
+        0px 25.09px 25.09px rgba(1, 3, 24, 0.09),
+        0px 6.43333px 13.51px rgba(1, 3, 24, 0.1),
+        0px 0px 0px rgba(1, 3, 24, 0.1);
+    }
+  }
+}
+.index-directive {
+  .text {
+    max-width: 539px;
+  }
+}
+.slide-button {
+  cursor: pointer;
+  opacity: 0.5;
+  width: 60px;
+  height: 60px;
+  transition: opacity 0.2s ease;
+  @include screen-xl {
+    width: 40px;
+    height: 40px;
+  }
+  &.active {
+    opacity: 1;
+  }
+}
+
 .statistics {
   &__bottom {
     display: flex;
@@ -780,14 +932,6 @@ export default {
       display: grid;
       gap: 55px;
       grid-template-columns: 1fr 170px;
-    }
-  }
-}
-
-.coinlist {
-  .item {
-    @include screen-xl {
-      width: 318px;
     }
   }
 }
