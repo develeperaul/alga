@@ -3,7 +3,7 @@
     <div class="tw-container">
       <h1 class="app-h1 tw-mb-16">{{ t('title') }}</h1>
       <OfferContent class="tw-mb-10" />
-      <OfferRounds class=" tw-mb-10" />
+      <!-- <OfferRounds class=" tw-mb-10" /> -->
       <OfferChart />
     </div>
   </q-page>

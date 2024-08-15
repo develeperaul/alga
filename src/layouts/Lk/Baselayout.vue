@@ -57,7 +57,7 @@
                   <span class="item__text"> {{ t("nav[2]") }} </span>
                 </li>
               </router-link>
-              <router-link
+              <!-- <router-link
                 :to="{ name: 'referals' }"
                 custom
                 v-slot="{ isExactActive, navigate }"
@@ -69,7 +69,8 @@
                 >
                   <span class="item__text"> {{ t("nav[4]") }} </span>
                 </li>
-              </router-link>
+              </router-link> -->
+
               <!-- <router-link
                 :to="{ name: 'history' }"
                 custom

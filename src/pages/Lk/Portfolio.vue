@@ -114,22 +114,36 @@
               />
               ${{ (+balance.relative_profit).toFixed(2) }}
             </span>
-            <span
-              class="tw-text-xxs"
-              :class="[
-                balance.is_profit_positive
-                  ? 'tw-text-green'
-                  : 'tw-text-invalid',
-              ]"
-              v-if="balance.relative_profit"
-              >{{ balance.is_profit_positive ? "+" : "-" }}
-              {{
-                (
-                  (+balance.relative_profit * 100) /
-                  +balance.actual_balance
-                ).toFixed(2)
-              }}%
-            </span>
+
+            <template v-if="+balance.actual_balance !== 0">
+              <span
+                class="tw-text-xxs"
+                :class="[
+                  balance.is_profit_positive
+                    ? 'tw-text-green'
+                    : 'tw-text-invalid',
+                ]"
+                v-if="balance.relative_profit "
+                >{{ balance.is_profit_positive ? "+" : "-" }}
+                {{
+                  (
+                    (+balance.relative_profit * 100) /
+                    +balance.actual_balance
+                  ).toFixed(2)
+                }}%
+              </span>
+              </template>
+              <span
+                class="tw-text-xxs"
+                :class="[
+                  balance.is_profit_positive
+                    ? 'tw-text-green'
+                    : 'tw-text-invalid',
+                ]"
+                v-else
+                >{{ balance.is_profit_positive ? "+" : "-" }}
+                0.00%
+              </span>
           </div>
         </div>
 
@@ -514,7 +528,7 @@ const i18n = {
         title: "Balance",
       },
       "index-title": "My Indexes",
-      "index-not": "You have not orders yet",
+      "index-not": "You have no orders yet",
       "index-not-btn": "Choose index",
       "index-table": {
         header: [

@@ -226,9 +226,9 @@
                     </div>
                   </div>
                 </q-carousel-slide>
-                
+
               </q-carousel>
-<!-- 
+<!--
               <button
                 class="arrow tw-absolute tw--left-15 tw-transform tw--translate-y-1/2 tw-top-1/2"
                 @click="$refs.carousel_star.previous()"
@@ -296,9 +296,6 @@
               <li>
                 {{ t("roadmap.stages.2.items.2") }}
               </li>
-              <li>
-                {{ t("roadmap.stages.2.items.3") }}
-              </li>
             </ul>
           </div>
           <div class="roadmap__item item">
@@ -325,6 +322,18 @@
               </li>
               <li>
                 {{ t("roadmap.stages.3.items.3") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.3.items.4") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.3.items.5") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.3.items.6") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.3.items.7") }}
               </li>
             </ul>
           </div>
@@ -355,6 +364,9 @@
               <li>
                 {{ t("roadmap.stages.4.items.3") }}
               </li>
+              <li>
+                {{ t("roadmap.stages.4.items.4") }}
+              </li>
             </ul>
           </div>
           <div class="roadmap__item item">
@@ -378,6 +390,21 @@
               </li>
               <li>
                 {{ t("roadmap.stages.5.items.2") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.5.items.3") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.5.items.4") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.5.items.5") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.5.items.6") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.5.items.7") }}
               </li>
             </ul>
           </div>
@@ -406,12 +433,85 @@
               <li>
                 {{ t("roadmap.stages.6.items.3") }}
               </li>
+              <li>
+                {{ t("roadmap.stages.6.items.4") }}
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+        <div class="roadmap__list">
+          <div class="roadmap__item item">
+            <div class="tw-flex">
+              <img src="./icons/stage-1.png" alt="" class="item__icon" />
+              <div>
+                <h2 class="item__title">
+                  {{ t("roadmap.stages.7.title") }}
+                </h2>
+                <h5 class="item__subtitle">
+                  {{ t("roadmap.stages.7.subtitle") }}
+                </h5>
+              </div>
+            </div>
+            <ul class="roadmap__item-list" id="roadmap-1">
+              <li>
+                {{ t("roadmap.stages.7.items.0") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.7.items.1") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.7.items.2") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.7.items.3") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.7.items.4") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.7.items.5") }}
+              </li>
+            </ul>
+          </div>
+          <div class="roadmap__item item">
+            <div class="tw-flex">
+              <img src="./icons/stage-2.png" alt="" class="item__icon" />
+              <div>
+                <h2 class="item__title">
+                  {{ t("roadmap.stages.8.title") }}
+                </h2>
+                <h5 class="item__subtitle">
+                  {{ t("roadmap.stages.8.subtitle") }}
+                </h5>
+              </div>
+            </div>
+            <ul class="roadmap__item-list">
+              <li>
+                {{ t("roadmap.stages.8.items.0") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.8.items.1") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.8.items.2") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.8.items.3") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.8.items.4") }}
+              </li>
+              <li>
+                {{ t("roadmap.stages.8.items.5") }}
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </section>
-    
+
     <Teleport to="body">
       <transition
         appear
@@ -514,48 +614,83 @@ const i18n = {
             items: [
               "Старт разработки MVP платформы ",
               "Разработка маркетингового плана",
-              "Создание и наполнение социальных сетей (Фейсбук, Инстаграм, Телеграм, Реддит)",
-              "Старт первичной маркетинговой компании",
+              "Запуск группы Market индексов (9 индексов)",
             ],
           },
           3: {
             title: "Этап 3",
-            subtitle: "Июль - Октябрь 2023",
+            subtitle: "Июль - Ноябрь 2023",
             items: [
-              "Регистрация компании и получение правовых документов",
-              "Начало инвестиционного раунда",
-              "Открытие офисов: Дубай, Москва, Уфа, Казань",
+              "Старт первичной маркетинговой компании",
+              "Тестирование алгоритмов индексов",
               "Тестирование функционала MVP платформы",
-              "Прохождение аудита платформы "
+              "Прохождение аудита платформы",
+              "Запуск глобальной маркетинговой компании ALGA",
+              "Запуск Fan индексов (3 индекса)",
+              "Запуск MVP платформы ALGA",
+              "Разработка мобильного приложения"
             ],
           },
           4: {
             title: "Этап 4",
-            subtitle: "Ноябрь 2023",
+            subtitle: "Декабрь 2023 - Февраль 2024",
             items: [
-              "Запуск глобальной маркетинговой компании ALGA ",
+              "Обновление функциональности платформы ALGA с интеграцией собственного бэктестера индексов",
+              "Запуск программы с добавлением индексовот адвайзеров платформы",
+              "Разработка и включение бэктестера для создания собственных индексов",
               "Проведение IEO на CEX",
-              "Листинг CEX",
-              "Запуск MVP платформы ALGA",
+              "Регистрация компании и получение правовых документов"
             ],
           },
           5: {
             title: "Этап 5",
             subtitle: "Март - Июнь 2024",
             items: [
-              "Обновление функционала платформы ALGA ",
-              "Запуск программы с добавлением индексовот адвайзеров платформы",
-              "Разработка мобильного приложения",
+              "Партнёрство с другими CEX биржами",
+              "Разработка социальной сети для возможности делиться собственными индексами с дальнейшим подключением к ним",
+              "Старт разработки собственной индексной биржи",
+              "Увеличение количества индексов до 35",
+              "Запуск собственного токена, с проведением IEO на CEX",
+              "Разработка усилинного алгоритма работы индексов",
+              "Разработка публичного REST API",
+              "Подготовка механизма тикеров для работы с CEX"
             ],
           },
           6: {
             title: "Этап 6",
-            subtitle: "Июль - Октябрь 2024",
+            subtitle: "Июль - Сентябрь 2024",
             items: [
-              "Листинг на других CEX биржах",
-              "Старт разработки собственной индексной биржи",
-              "Увеличение количества индексов до 15",
-              "Подписание партнёрских соглашений с крупными хедж-фондами",
+              "Публикация тикеров индексов на CEX",
+              "Разработка модуля баланса личного кабинета",
+              "Разработка Light - режима интерфейса пользователя",
+              "Разработка PRO - режима интерфейса пользователя",
+              "Разработка функции отложенного исполнения ордера",
+              "Разработка функции стоп-лосс ордера",
+              "Разработка новой публичной лендинг страницы",
+            ],
+          },
+          7: {
+            title: "Этап 7",
+            subtitle: "Октябрь - Декабрь, 2024",
+            items: [
+              "Разработка социального модуля",
+              "Разработка модуля формирования собственного индекса",
+              "Раширение механизмов ввода/вывода новыми способами",
+              "Внедрение новых типов индексов до 15 штук",
+              "Разработка нового профиля пользователя",
+              "Внедрение механизма KYC",
+            ],
+          },
+          8: {
+            title: "Этап 8",
+            subtitle: "Январь - Июнь, 2025",
+            items: [
+              "Публикация тикеров индексов на новых CEX",
+              "Разработка функций биржевой торговли",
+              "Разработка публичного REST API с поддержкой Socket API",
+              "Разработка модуля Кошелек",
+              "Внедрение новых типов индексов до 15 штук и до 5 новых категорий индексов",
+              "Интеграция аппаратных хранилищ криптоактивов"
             ],
           },
         },
@@ -673,48 +808,81 @@ const i18n = {
             items: [
               "Development of platform MVP",
               "Development of the marketing plan",
-              "Creation and content of socials (Facebook, Instagram, Telegram, Reddit)",
-              "Start of the preliminary marketing campaign",
+              "Launch of the Market Index group (9 index)"
             ],
           },
           3: {
             title: "Stage 3",
             subtitle: "July-October, 2023",
             items: [
+              "Start of the preliminary marketing campaign",
               "Testing index algorithms",
               "Testing the functionality of the MVP platform",
               "Platform security audit completion",
+              "Launch of global marketing company ALGA",
+              "Adding Fan Indexes (3)",
+              "Launch of MVP of the ALGA platform",
+              "Start of Mobile Application Development",
             ],
           },
           4: {
             title: "Stage 4",
-            subtitle: "November 2023 -February 2024",
+            subtitle: "December 2023 -February 2024",
             items: [
-              "Launch of global marketing company ALGA",
-              "Adding Fan Indexes (3)",
-              "Launch of the Market Index group (9 индексов)",
-              "Launch of MVP of the ALGA platform",
-              "Start of Mobile Application Development"
+              "Update the functionality of the ALGA platform with the integration of our own index backtester",
+              "Launching a program with the addition of influencer indexes",
+              "Development and inclusion of a backtester for creating your own indexes",
+              "Conducting an IEO at CEX",
+              "Registration of a company and obtaining legal documents"
             ],
           },
           5: {
             title: "Stage 5",
             subtitle: "March - June, 2024",
             items: [
-              "Update the functionality of the ALGA platform with the integration of our own index backtester",
-              "Launching a program with the addition of influencer indexes",
-              "Development and inclusion of a backtester for creating your own indexes",
-              "Conducting an IEO at CEX"
+              "Partnership with CEX exchanges",
+              "Development of a social network for the ability to share your own indexes with further connection to them",
+              "Start of development of your own index exchange",
+              "Increasing indexes to 35",
+              "Launch of own token via IEO on CEX",
+              "Enhancing index algorithms",
+              "Developing a public REST API",
+              "Preparing ticker mechanisms for CEX integration",
             ],
           },
           6: {
             title: "Stage 6",
-            subtitle: "July-October 2024",
+            subtitle: "July - September, 2024",
             items: [
-              "Listing on CEX exchanges",
-              "Development of a social network for the ability to share your own indexes with further connection to them",
-              "Start of development of your own index exchange",
-              "Partnership agreements with solid hedge-funds",
+              "Publishing index tickers on CEX",
+              "Building a personal account balance module",
+              "Creating Light and PRO user interface modes",
+              "Adding order execution delay and stop-loss order functions",
+              "Designing a new public landing page"
+            ],
+          },
+          7: {
+            title: "Stage 7",
+            subtitle: "October - December, 2024",
+            items: [
+              "Developing a social module",
+              "Crafting a custom index module",
+              "Expanding input/output methods",
+              "Introducing up to 15 new index types",
+              "Updating user profiles",
+              "Implementing Know Your Customer (KYC)"
+            ],
+          },
+          8: {
+            title: "Stage 8",
+            subtitle: "January - June, 2025",
+            items: [
+              "Expanding index ticker publication to new CEXs",
+              "Implementing exchange trading features",
+              "Enhancing the public REST API with Socket API support",
+              "Introducing a Wallet module",
+              "Integrating up to 15 new index types and 5 new index categories",
+              "Integrating hardware crypto asset storage"
             ],
           },
         },

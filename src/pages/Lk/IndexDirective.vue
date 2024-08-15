@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="tw-text-xxs tw-text-title tw-text-center">
-        © 2021-2023 ALGA. <br />
+        © 2021-{{ new Date().getFullYear() }} ALGA. <br />
         All Rights Reserved
       </div>
     </div>
@@ -99,18 +99,20 @@
           {{ t("indexderivatives.title") }}
         </h2>
       </div>
+      <div class=" tw-grid xl:tw-hidden tw-overflow-hidden">
 
-      <div
-        class="tw-flex xl:tw-hidden tw-justify-center xl:tw-gap-5 tw-gap-3 tw-mb-5"
-      >
-        <base-button
-          v-for="item in typesDirevative"
-          class="button button__dense"
-          :design="typeDirevative === item ? 'green' : 'border'"
-          @click="selectTypeDirevatives(item)"
+        <div
+          class="tw-flex  xl:tw-gap-5 tw-gap-3 tw-mb-5 tw-overflow-auto "
         >
-          {{ item }}
-        </base-button>
+          <base-button
+            v-for="item in typesDirevative"
+            class="button button__dense"
+            :design="typeDirevative === item ? 'green' : 'border'"
+            @click="selectTypeDirevatives(item)"
+          >
+            {{ item }}
+          </base-button>
+        </div>
       </div>
       <div class="desk-n">
         <div class="tw-grid tw-gap-4">
@@ -392,6 +394,7 @@ import MarkIcon from "src/components/V3/MarkIcon.vue";
 import MiniAreaChart from "src/components/V3/MiniAreaChart.vue";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
+import {useRoute} from "vue-router"
 import useChart from "src/composition/useChart.js";
 import useChartData from "src/composition/V3/useChartData.js";
 import useBuyWidthdrawalPopup from "src/composition/V3/useBuyWidthdrawalPopup";
@@ -554,6 +557,7 @@ export default {
     IndexDetailedModal,
   },
   setup() {
+
     const slide = ref(1);
     const store = useStore();
     const { charts, getChart } = useChart();
@@ -575,7 +579,7 @@ export default {
       useBuyWidthdrawalPopup();
     const { t } = useI18n(i18n);
     const typeDirevative = ref("ALGA");
-    const typesDirevative = ["ALGA", "Market", "Fund", "KOL’s"];
+    const typesDirevative = ["ALGA", "Market", "Fund", "KOL’s", "Partner Index"];
     const derivatives = computed(() => {
       const arr = store.getters["landing/derivatives"];
       if (typeDirevative.value === "ALGA")
@@ -622,6 +626,10 @@ export default {
         return arr.filter((item) => {
           if (item.id === 21 || item.id === 22) return item;
         });
+      if (typeDirevative.value === "Partner Index")
+        return arr.filter((item) => {
+          if (item.id === 23) return item;
+      });
     });
 
     watch(

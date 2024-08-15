@@ -52,7 +52,7 @@
       <div class="messages__item" v-for="n in 14">
         <div class="messages__item-title">Успешная сделка</div>
         <div class="messages__item-text">
-          Обмен ETH-LTC исполнен. Ваш баланс 0.000052 LTC. 
+          Обмен ETH-LTC исполнен. Ваш баланс 0.000052 LTC.
         </div>
         <div class=" messages__item-date">
           <span>
@@ -64,7 +64,7 @@
         </div>
       </div>
     </div>
-    
+
   </q-page>
 </template>
 
@@ -82,7 +82,7 @@ const i18n = {
   messages: {
     "ru-RU": {
       title: "Сообщения",
-      
+
       "index-title": "Мои Индексы",
       "index-not": "У вас пока не было покупок",
       "index-not-btn": "Выбрать индекс",
@@ -103,13 +103,13 @@ const i18n = {
         },
       },
 
-      
+
     },
     "en-US": {
       title: "Messages",
-      
+
       "index-title": "My Indexes",
-      "index-not": "You have not orders yet",
+      "index-not": "You have no orders yet",
       "index-not-btn": "Choose index",
       "index-table": {
         header: [
@@ -128,7 +128,7 @@ const i18n = {
         },
       },
 
-      
+
     },
     de: {
       title: "Mitteilungen",
@@ -155,7 +155,7 @@ const i18n = {
         },
       },
 
-      
+
     },
     "zh-CN": {
       title: "留言",
@@ -176,7 +176,7 @@ const i18n = {
         },
       },
 
-      
+
     },
   },
 };

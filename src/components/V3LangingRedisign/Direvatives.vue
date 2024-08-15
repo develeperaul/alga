@@ -19,14 +19,25 @@
             class="card card_border card-derivative"
             v-for="derivative in derivatives"
             :key="derivative.id"
+
           >
-            <div class="tw-flex tw-gap-3.5 tw-items-center">
+          <IndexDetailedModal
+              ref="detailed"
+              :showed="derivative.id === showedIndexId"
+              @update:showed="showedIndexId = null"
+              :derivative="derivative"
+              :round-diagram="{
+                values: roundDiagramData(derivative['currency_shares']),
+                colors: roundDiagramColors(derivative['currency_shares']),
+              }"
+            />
+            <div class="tw-flex tw-gap-3.5 tw-items-center tw-cursor-pointer" @click="showedIndexId = derivative.id">
               <div class="circle tw-flex-shrink-0">
                 <img :src="derivative.image.url" alt="" />
               </div>
               <h4 class="tw-text-sm">{{ derivative.name }}</h4>
             </div>
-            <p class="tw-mt-2.5 tokens tw-overflow-auto">
+            <p class="tw-mt-2.5 tokens tw-overflow-auto" >
               <template
                 v-for="currency in derivative.currency_shares"
                 :key="derivative.id + '_' + currency.id"
@@ -39,7 +50,7 @@
               class="tw-mt-5 tw-flex tw-justify-between"
               v-if="getChart(derivative.id)"
             >
-              <div>
+              <div @click="showedIndexId = derivative.id" class="  tw-cursor-pointer">
                 <p
                   class="tw-text-white"
                   v-html="t('indexD.card.profitability.1', { numb: '1' })"
@@ -53,7 +64,7 @@
                 <MiniAreaChart :values="getChartData(derivative.id)" />
 
                 <button
-                  @click="stage2"
+                  @click="stage2(derivative.id)"
                   class="tw-mt-2 tw-flex tw-gap-1.5 tw-items-center"
                 >
                   <span class="buy">{{ t("other.button.buy") }}</span>
@@ -104,7 +115,7 @@
               class="column no-wrap flex-center"
             >
               <div class="card card_border card-derivative">
-                <div class="tw-flex tw-gap-3.5 tw-items-center">
+                <div class="tw-flex tw-gap-3.5 tw-items-center tw-cursor-pointer" @click="showedIndexId = derivative.id">
                   <div class="circle tw-flex-shrink-0">
                     <img src="./img/index-icon_1.png" alt="" />
                   </div>
@@ -122,7 +133,7 @@
                   class="tw-mt-5 tw-flex tw-justify-between"
                   v-if="getChart(derivative.id)"
                 >
-                  <div>
+                  <div class=" tw-cursor-pointer" @click="showedIndexId = derivative.id">
                     <p
                       class="tw-text-white"
                       v-html="t('indexD.card.profitability.1', { numb: '1' })"
@@ -138,7 +149,7 @@
                     <MiniAreaChart :values="getChartData(derivative.id)" />
 
                     <button
-                      @click="stage2"
+                      @click="stage2(derivative.id)"
                       class="tw-mt-2 tw-flex tw-gap-1.5 tw-items-center"
                     >
                       <span class="buy">{{ t("other.button.buy") }}</span>
@@ -157,10 +168,12 @@
 <script>
 import { ref, computed, watch } from "vue";
 import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router"
 import useChart from "src/composition/useChart.js";
 import { useI18n } from "vue-i18n";
 import MiniAreaChart from "src/components/V3/MiniAreaChart.vue";
 import MarkIcon from "src/components/V3/MarkIcon.vue";
+import IndexDetailedModal from 'src/components/LK/Modal/IndexDetailed2.vue';
 const i18n = {
   messages: {
     "ru-RU": {
@@ -825,6 +838,7 @@ export default {
   components: {
     MiniAreaChart,
     MarkIcon,
+    IndexDetailedModal
   },
   props: {
     charts: Array,
@@ -832,11 +846,12 @@ export default {
   setup(props) {
     const $i18n = useI18n();
     const { t } = useI18n(i18n);
+    const router = useRouter()
     const store = useStore();
     const derivativesSlider = ref(null);
     const slideIndex = ref(0);
     const typeDirevative = ref("ALGA");
-    const typesDirevative = ["ALGA", "Market", "Fund", "KOL’s"];
+    const typesDirevative = ["ALGA", "Market", "Fund", "KOL’s", 'Partner Index'];
     const derivatives = computed(() => {
       const arr = store.getters["landing/derivatives"];
 
@@ -884,7 +899,20 @@ export default {
         return arr.filter((item) => {
           if (item.id === 21 || item.id === 22) return item;
         });
+      if (typeDirevative.value === "Partner Index")
+        return arr.filter((item) => {
+          if (item.id === 23) return item;
+      });
     });
+
+    const showedIndexId = ref(null);
+
+    const roundDiagramData = (currencys) => {
+      return currencys.map((item) => +item["percent_share"]);
+    };
+    const roundDiagramColors = (currencys) => {
+      return currencys.map((item) => item["bg_color"]);
+    };
 
     watch(typeDirevative, (val) => {
       derivativesSlider.value?.goTo(0);
@@ -908,6 +936,11 @@ export default {
     const selectTypeDirevatives = (type) => {
       typeDirevative.value = type;
     };
+    const stage2 =(id) =>{
+
+      console.log('ssss')
+        router.push({ name: 'index-directive', query: { 'buy': id } })
+    }
     return {
       derivatives,
       getChart,
@@ -919,6 +952,10 @@ export default {
       slideIndex,
 
       derivativesSlider,
+      stage2,
+      showedIndexId,
+      roundDiagramData,
+      roundDiagramColors
     };
   },
 };

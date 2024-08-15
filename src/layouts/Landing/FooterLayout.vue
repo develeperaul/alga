@@ -94,7 +94,7 @@
           />
           <div class="tw-flex tw-gap-2 tw-mb-4">
             <a
-              href="https://instagram.com/algaecosystem?igshid=NmZiMzY2Mjc="
+              href="https://instagram.com/algaecosystem"
               target="_blank"
             >
               <svg

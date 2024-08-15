@@ -140,29 +140,30 @@
           <div class="tw-mt-10 tw-grid tw-gap-4 ">
             <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-3">
 
-              <div class="card-partner  xl:tw-justify-self-end">
+              <div class="card-partner  ">
                 <a href="#">
                   <img src="./img/backers/okx.png" alt="" width="134" height="60" />
                 </a>
               </div>
-              <div class="card-partner xl:tw-justify-self-center">
+              <!-- <div class="card-partner xl:tw-justify-self-center">
                 <a href="#">
                   <img src="./img/backers/bitunix.png" alt="" width="205" height="40" />
                 </a>
-              </div>
+              </div> -->
               <div class="card-partner">
                 <a href="#">
                   <img src="./img/backers/take-profit.png" alt="" width="144" height="63" />
                 </a>
               </div>
-            </div>
-            <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-4">
-
-              <div class="card-partner xl:tw-justify-self-end">
+              <div class="card-partner ">
                 <a href="#">
                   <img src="./img/backers/salad.png" alt="" width="344" height="96"/>
                 </a>
               </div>
+            </div>
+            <div class=" tw-grid  tw-justify-center tw-gap-8 xl:tw-gap-0 xl:tw-grid-cols-3">
+
+
               <div class="card-partner xl:tw-justify-self-center">
                 <a href="#">
                   <img src="./img/backers/ox.png" alt="" width="227" height="40" />
