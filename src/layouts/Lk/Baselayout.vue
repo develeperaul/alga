@@ -127,11 +127,11 @@
 
           <div class="desk-n tw-flex tw-items-center tw-gap-4">
             <Locale />
-            <div>
+            <!-- <div>
               <button class="burger" @click="dropDown = !dropDown">
                 <span></span><span></span><span></span>
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
