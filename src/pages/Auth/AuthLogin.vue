@@ -9,14 +9,14 @@
           rules="required|email"
           type="email"
           label="E-mail"
-          placeholder="ivanov@domain.ru"
+
         />
         <AppInput
           name="password"
           rules="required"
           type="password"
           :label="$t('inputs.password')"
-          :placeholder="$t('inputs.password')"
+
         />
 
         <AppButton

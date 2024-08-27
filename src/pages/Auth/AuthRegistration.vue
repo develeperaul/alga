@@ -12,7 +12,7 @@
           <AppInput
             name="name"
             :label="$t('inputs.name.label')"
-            :placeholder="$t('inputs.name.placeholder')"
+
             rules="required"
           />
           <AppInput
@@ -20,13 +20,13 @@
             rules="required|email"
             type="email"
             label="E-mail"
-            placeholder="ivanov@domain.ru"
+
           />
           <AppInput
             rules="required|cellphone"
             name="cellphone"
             :label="$t('inputs.cellphone')"
-            placeholder="+123456789012345"
+
           />
 
           <AppCheckbox

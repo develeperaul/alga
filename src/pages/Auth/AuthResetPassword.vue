@@ -10,7 +10,7 @@
             rules="required|email"
             type="email"
             label="E-mail"
-            placeholder="ivanov@domain.ru"
+
           />
           <AppButton
             type="submit"

@@ -7,6 +7,12 @@
     <div>
       <button class="tw-text-purple-light" @click="copyRefLink">{{ t('copy') }}</button>
     </div>
+    <div class=" tw-mt-3 tw-text-xs" >
+      {{t('profit')}}
+      <span class=" tw-text-green">
+        30%
+      </span>
+    </div>
   </section>
 </template>
 
@@ -22,11 +28,13 @@
         title: 'Моя реферальная ссылка',
         successCopy: 'Реферальная ссылка скопирована!',
         copy: 'Скопировать',
+        profit: "Процент прибыли от сделок клиентов"
       },
       "en-US": {
         title: 'My referral link',
         successCopy: 'Referral link copied!',
         copy: 'Copy',
+        profit: "Profits From Your Clients' Trades"
       },
     }
   };

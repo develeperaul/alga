@@ -46,6 +46,22 @@ const routes = [
           name: "portfolio",
         },
         {
+
+          path: "referals",
+          component: () => import("pages/Lk/Referrals.vue"),
+          name: "referals",
+        },
+        {
+          path: "referals-history",
+          component: () => import("pages/Lk/ReferralsHistory.vue"),
+          name: "referals-history",
+        },
+        {
+          path: "output-bonuses",
+          component: () => import("pages/Lk/OutputBonuses.vue"),
+          name: "output-bonuses",
+        },
+        {
           path: "support",
           component: () => import("pages/Lk/Support.vue"),
           name: "support",

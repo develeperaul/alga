@@ -132,7 +132,9 @@
       </div>
       <!-- <div class="profile-step__item tw-mt-5" v-if="referralLink">
         <div class="tw-text-purple-dark">{{ t("ref-title") }}</div>
+
         <div class=" tw-flex tw-flex-wrap tw-gap-3">
+
 
           <div>
             <a :href="referralLink" target="_blank">{{ referralLink }}</a>
@@ -144,8 +146,10 @@
             {{ t("copy") }}
           </button>
         </div>
+
       </div> -->
       <base-button @click.prevent="$app.logout"  class=" tw-w-full tw-mt-5"> {{ t("exit") }}</base-button>
+
 
     </div>
   </section>
@@ -172,7 +176,8 @@ const i18n = {
       "change-phone": "Изменить телефон",
       "phone-title": "Новый номер телефона",
       "ref-title": "Реферальная ссылка",
-      exit:'Выход',
+      exit: 'Выход',
+      referalsLink: "Рефералы",
       phone: {
         label: "Номер телефона",
       },
@@ -188,7 +193,8 @@ const i18n = {
       "change-phone": "Change Phone",
       "phone-title": "New Phone Number",
       "ref-title": "Referral link",
-      exit:'Exit',
+      exit: 'Exit',
+      referalsLink: "Referrals",
       phone: {
         label: "Phone number",
       },
