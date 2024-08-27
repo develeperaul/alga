@@ -5,13 +5,16 @@
         class="tw-gap-7"
         style="
           display: grid;
-          grid-template-columns: 200px 280px 150px;
+          grid-template-columns: 50px 280px 150px 100px 150px;
           padding: 10px 30px;
         "
       >
         <p>{{ t("table.columns[0]") }}</p>
         <p>{{ t("table.columns[1]") }}</p>
         <p>{{ t("table.columns[2]") }}</p>
+        <p>{{ t("table.columns[3]") }}</p>
+        <p>{{ t("table.columns[4]") }}</p>
+
       </div>
       <div v-if="data.length === 0">
         <p class="tw-text-center tw-py-8">{{ t("table.emptyLabel") }}</p>
@@ -21,9 +24,11 @@
           class="item card card__border-line tw-items-center tw-gap-7"
           v-for="row in data"
         >
-          <div>{{ row.referral.email }}</div>
-          <div>{{  dayjs(row.created_at).format("DD.MM.YYYY")}}</div>
+          <div>{{ row.id }}</div>
+          <div>{{ row.address }}</div>
           <div>{{ Number(row.amount).toFixed(2) ?? '-' }}</div>
+          <div>{{ dayjs(row.created_at).format("DD.MM.YYYY") }}</div>
+          <div>{{ row.status.title }}</div>
         </div>
       </div>
     </div>
@@ -41,13 +46,13 @@ import { useI18n } from "vue-i18n";
     messages: {
       "ru-RU": {
         table: {
-          columns: [  'Email',  "Дата",'Бонус' ],
-          emptyLabel: 'Еще нет рефералов',
+          columns: [  'Id',"Адрес","Количество",  "Дата",'Статус' ],
+          emptyLabel: 'Заявок на вывод нет',
         },
       },
       "en-US": {
         table: {
-          columns: [ 'Email',"Date", 'Bounty Amount' ],
+          columns: [ 'Id',"Address", 'Amount', 'Created_at', "Status" ],
           emptyLabel: 'No available data',
         },
       },
@@ -56,7 +61,7 @@ import { useI18n } from "vue-i18n";
 
   const { t } = useI18n(i18n);
 
-  const { fetcher, complete, data } = usePagination(ReferralsAPI.list);
+  const { fetcher, complete, data } = usePagination(ReferralsAPI.getSkims);
 </script>
 
 <style scoped lang="scss">
@@ -64,6 +69,9 @@ import { useI18n } from "vue-i18n";
     min-width: max-content;
     width: 100%;
     display: grid;
-    grid-template-columns: 200px 280px 150px;
+    grid-template-columns: 50px 280px 150px 100px 150px;
+    & * {
+      white-space: nowrap;
+    }
   }
 </style>

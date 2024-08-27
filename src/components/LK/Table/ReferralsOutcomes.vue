@@ -21,9 +21,9 @@
           class="item card card__border-line tw-items-center tw-gap-7"
           v-for="row in data"
         >
-          <div>{{ row.referral.email }}</div>
-          <div>{{  dayjs(row.created_at).format("DD.MM.YYYY")}}</div>
+          <div>{{ row.id }}</div>
           <div>{{ Number(row.amount).toFixed(2) ?? '-' }}</div>
+          <div>{{ dayjs(row.created_at).format("DD.MM.YYYY") }}</div>
         </div>
       </div>
     </div>
@@ -41,13 +41,13 @@ import { useI18n } from "vue-i18n";
     messages: {
       "ru-RU": {
         table: {
-          columns: [  'Email',  "Дата",'Бонус' ],
-          emptyLabel: 'Еще нет рефералов',
+          columns: [  'Id',  "Количество",'Дата создания' ],
+          emptyLabel: 'Еще нет списаний',
         },
       },
       "en-US": {
         table: {
-          columns: [ 'Email',"Date", 'Bounty Amount' ],
+          columns: [ 'Id',"Amount", 'Created_at' ],
           emptyLabel: 'No available data',
         },
       },
@@ -56,7 +56,7 @@ import { useI18n } from "vue-i18n";
 
   const { t } = useI18n(i18n);
 
-  const { fetcher, complete, data } = usePagination(ReferralsAPI.list);
+  const { fetcher, complete, data } = usePagination(ReferralsAPI.getOutcomes);
 </script>
 
 <style scoped lang="scss">
@@ -65,5 +65,8 @@ import { useI18n } from "vue-i18n";
     width: 100%;
     display: grid;
     grid-template-columns: 200px 280px 150px;
+    & * {
+      white-space: nowrap;
+    }
   }
 </style>

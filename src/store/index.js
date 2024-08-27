@@ -20,6 +20,7 @@ export default store(function (/* { ssrContext } */) {
       info: require("./info").default,
       transactions: require("./transactions").default,
       polls: require("./polls").default,
+      promo: require("./promo").default,
     },
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only

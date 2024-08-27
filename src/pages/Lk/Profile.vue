@@ -132,17 +132,24 @@
       </div>
       <div class="profile-step__item tw-mt-5" v-if="referralLink">
         <div class="tw-text-purple-dark">{{ t("ref-title") }}</div>
-        <div>
-          <a :href="referralLink" target="_blank">{{ referralLink }}</a>
+        <div class=" tw-grid tw-gap-2 xl:tw-flex tw-justify-items-start xl:tw-justify-between xl:tw-gap-0">
+
+          <div>
+            <a :href="referralLink" target="_blank">{{ referralLink }}</a>
+          </div>
+          <button
+            class="tw-text-purple-light tw-cursor-pointer"
+            @click="copyRefLink"
+          >
+            {{ t("copy") }}
+          </button>
         </div>
-        <button
-          class="tw-text-purple-light tw-cursor-pointer"
-          @click="copyRefLink"
-        >
-          {{ t("copy") }}
-        </button>
       </div>
-      <base-button @click.prevent="$app.logout"  class=" tw-mt-5"> {{ t("exit") }}</base-button>
+      <div class=" tw-grid tw-gap-4 xl:tw-flex">
+
+        <base-button @click.prevent="$app.logout"  class=" tw-mt-5"> {{ t("exit") }}</base-button>
+        <base-button @click="$router.push({name:'referals'})"  class=" tw-mt-5"> {{ t("referalsLink") }}</base-button>
+      </div>
     </div>
   </section>
   </q-page>
@@ -168,7 +175,8 @@ const i18n = {
       "change-phone": "Изменить телефон",
       "phone-title": "Новый номер телефона",
       "ref-title": "Реферальная ссылка",
-      exit:'Выход',
+      exit: 'Выход',
+      referalsLink: "Рефералы",
       phone: {
         label: "Номер телефона",
       },
@@ -184,7 +192,8 @@ const i18n = {
       "change-phone": "Change Phone",
       "phone-title": "New Phone Number",
       "ref-title": "Referral link",
-      exit:'Exit',
+      exit: 'Exit',
+      referalsLink: "Referrals",
       phone: {
         label: "Phone number",
       },

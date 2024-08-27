@@ -78,6 +78,11 @@ const routes = [
           name: "referals",
         },
         {
+          path: "referals-history",
+          component: () => import("pages/Lk/ReferralsHistory.vue"),
+          name: "referals-history",
+        },
+        {
           path: "output-bonuses",
           component: () => import("pages/Lk/OutputBonuses.vue"),
           name: "output-bonuses",
