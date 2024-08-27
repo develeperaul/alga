@@ -1,0 +1,13 @@
+{
+  "appId": "ru.algacoin.app",
+  "appName": "Alga",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}

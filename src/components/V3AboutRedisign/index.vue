@@ -40,11 +40,11 @@
             <div class="mob-n">
               <Locale />
             </div>
-            <div class="desk-n">
+            <!-- <div class="desk-n">
               <button class="burger" @click="dropDown = !dropDown">
                 <span></span><span></span><span></span>
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="header-content">

@@ -130,9 +130,11 @@
           </div>
         </Form>
       </div>
-      <div class="profile-step__item tw-mt-5" v-if="referralLink">
+      <!-- <div class="profile-step__item tw-mt-5" v-if="referralLink">
         <div class="tw-text-purple-dark">{{ t("ref-title") }}</div>
-        <div class=" tw-grid tw-gap-2 xl:tw-flex tw-justify-items-start xl:tw-justify-between xl:tw-gap-0">
+
+        <div class=" tw-flex tw-flex-wrap tw-gap-3">
+
 
           <div>
             <a :href="referralLink" target="_blank">{{ referralLink }}</a>
@@ -144,12 +146,11 @@
             {{ t("copy") }}
           </button>
         </div>
-      </div>
-      <div class=" tw-grid tw-gap-4 xl:tw-flex">
 
-        <base-button @click.prevent="$app.logout"  class=" tw-mt-5"> {{ t("exit") }}</base-button>
-        <base-button @click="$router.push({name:'referals'})"  class=" tw-mt-5"> {{ t("referalsLink") }}</base-button>
-      </div>
+      </div> -->
+      <base-button @click.prevent="$app.logout"  class=" tw-w-full tw-mt-5"> {{ t("exit") }}</base-button>
+
+
     </div>
   </section>
   </q-page>
@@ -306,7 +307,6 @@ export default {
         type: "positive",
       });
     }
-
     const editPassword = ref(false);
     const editPhone = ref(false);
     return {
@@ -316,7 +316,6 @@ export default {
       updateEmail,
       updatePassword,
       updatePhone,
-      copyRefLink,
       isErrorEmail,
       isErrorPassword,
       isErrorPhone,
@@ -327,6 +326,7 @@ export default {
 
       email,
       phone,
+      copyRefLink,
       referralLink,
 
       editPassword,

@@ -51,11 +51,11 @@
                 <span>EN </span>
               </button>
             </div> -->
-            <div class="desk-n">
+            <!-- <div class="desk-n">
               <button class="burger" @click="dropDown = !dropDown">
                 <span></span><span></span><span></span>
               </button>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
