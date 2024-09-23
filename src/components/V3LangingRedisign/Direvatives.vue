@@ -885,6 +885,9 @@ export default {
             item.id === 20 ||
             item.id === 21 ||
             item.id === 22
+            ||
+            item.id === 23 ||
+            item.id === 24
           )
             return;
           return item;
@@ -897,7 +900,7 @@ export default {
 
       if (typeDirevative.value === "KOL’s")
         return arr.filter((item) => {
-          if (item.id === 21 || item.id === 22) return item;
+          if (item.id === 21 || item.id === 22 || item.id === 24) return item;
         });
       if (typeDirevative.value === "Partner Index")
         return arr.filter((item) => {
