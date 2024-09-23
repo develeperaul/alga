@@ -2,39 +2,29 @@
 <template>
   <div>
     <component :is="headerOnly ? 'div' : 'header'" class="header" :class="{ 'header--maximized': !headerOnly }">
+      <video v-if="$route.name === 'home'" autoplay="" muted="" loop="" poster=""
+        class="video">
+        <source src="/ALGA.webm" type="video/webm">
+      </video>
       <div class="tw-container tw-h-full">
         <div class="header__top">
-          <img
-            :src="require('assets/images/logo-v3.svg')"
-            alt="logo"
-            class="tw-cursor-pointer"
-            @click="$router.push({ name: 'home' })"
-          />
+          <img :src="require('assets/images/logo-v3.svg')" alt="logo" class="tw-cursor-pointer"
+            @click="$router.push({ name: 'home' })" />
 
           <div class="tw-hidden xl:tw-flex xl:tw-gap-10">
             <button @click="$router.push({ name: 'about' })">
               {{ t("header.nav[0]") }}
             </button>
-            <a
-              class="tw-text-white hover:tw-text-white"
-              href="https://t.me/algafinance_int"
-              target="_blank"
-              >{{ t("header.nav[1]") }}</a
-            >
+            <a class="tw-text-white hover:tw-text-white" href="https://t.me/algafinance_int" target="_blank">{{
+              t("header.nav[1]") }}</a>
           </div>
           <div class="tw-flex tw-items-center tw-gap-4">
-            <button
-              v-if="isAuth"
-              class="button button_xs button_border-white button__login"
-              @click="$router.push({ name: 'index-directive' })"
-            >
+            <button v-if="isAuth" class="button button_xs button_border-white button__login"
+              @click="$router.push({ name: 'index-directive' })">
               {{ t("lk") }}
             </button>
-            <button
-              v-else
-              class="button button_xs button_border-white button__login"
-              @click="$router.push({ name: 'auth.login' })"
-            >
+            <button v-else class="button button_xs button_border-white button__login"
+              @click="$router.push({ name: 'auth.login' })">
               {{ t("dropdown.buttons.login") }}
             </button>
             <div class="mob-n">
@@ -48,89 +38,52 @@
           </div>
         </div>
 
-        <div v-if="!headerOnly" class="header-content">
+        <!-- <div v-if="!headerOnly" class="header-content">
           <h2 class="header-content__title">{{ t("header.title") }}</h2>
-          <div
-            class="tw-text-md2 xl:tw-text-md1 tw-leading-none tw-mb-4 xl:tw-mb-10"
-            v-html="t('header.subtitle')"
-          ></div>
+          <div class="tw-text-md2 xl:tw-text-md1 tw-leading-none tw-mb-4 xl:tw-mb-10" v-html="t('header.subtitle')">
+          </div>
           <div v-if="isAuth" class="tw-mb-5 xl:tw-mb-10">
-            <button
-              class="button button_base button_green button_minw-base"
-              @click="$router.push({ name: 'index-directive' })"
-            >
+            <button class="button button_base button_green button_minw-base"
+              @click="$router.push({ name: 'index-directive' })">
               {{ t("lk") }}
             </button>
           </div>
-          <div
-            v-else
-            class="tw-flex tw-flex-col xl:tw-flex-row tw-gap-6 tw-mb-5 xl:tw-mb-10"
-          >
-            <button
-              class="button button_base button_border-green button_minw-md"
-              @click="$router.push({ name: 'auth.login' })"
-            >
+          <div v-else class="tw-flex tw-flex-col xl:tw-flex-row tw-gap-6 tw-mb-5 xl:tw-mb-10">
+            <button class="button button_base button_border-green button_minw-md"
+              @click="$router.push({ name: 'auth.login' })">
               {{ t("dropdown.buttons.login") }}
             </button>
-            <button
-              class="button button_base button_green button_minw-base"
-              @click="$router.push({ name: 'auth.registr' })"
-            >
+            <button class="button button_base button_green button_minw-base"
+              @click="$router.push({ name: 'auth.registr' })">
               {{ t("dropdown.buttons.register") }}
             </button>
           </div>
           <div class="tw-flex tw-gap-4 tw-flex-wrap">
-            <div
-              class="header-content__derivative"
-              v-for="derivative in derivatives.slice(0, 3)"
-              :key="derivative.id"
-            >
+            <div class="header-content__derivative" v-for="derivative in derivatives.slice(0, 3)" :key="derivative.id">
               <div class="tw-flex tw-flex-col tw-justify-between">
                 <span v-if="derivative?.name">
                   {{ derivative.name }}
                 </span>
-                <div
-                  class="tw-flex tw-gap-x-1 tw-items-center"
-                  v-if="getChart(derivative.id)?.profitability"
-                >
-                  <MarkIcon
-                    class="tw-h-2.5"
-                    :mark="getChart(derivative.id)?.profitability"
-                  />
-                  <span class="tw-text-xxs-1"
-                    >{{ getChart(derivative.id)?.profitability }}%</span
-                  >
+                <div class="tw-flex tw-gap-x-1 tw-items-center" v-if="getChart(derivative.id)?.profitability">
+                  <MarkIcon class="tw-h-2.5" :mark="getChart(derivative.id)?.profitability" />
+                  <span class="tw-text-xxs-1">{{ getChart(derivative.id)?.profitability }}%</span>
                 </div>
               </div>
-              <div
-                class="tw-flex tw-flex-col tw-justify-between"
-                v-if="getChart(derivative.id)"
-              >
-                <MiniAreaChart
-                  :values="getChartData(derivative.id)"
-                  width="43"
-                  height="22"
-                />
+              <div class="tw-flex tw-flex-col tw-justify-between" v-if="getChart(derivative.id)">
+                <MiniAreaChart :values="getChartData(derivative.id)" width="43" height="22" />
 
-                <button
-                  @click="stage2"
-                  class="tw-flex tw-gap-1.5 tw-items-center tw-mb-1"
-                >
+                <button @click="stage2" class="tw-flex tw-gap-1.5 tw-items-center tw-mb-1">
                   <span class="buy">{{ t("other.button.buy") }}</span>
-                  <img
-                    class="buy-arrow"
-                    src="./icons/button-arrow.svg"
-                    alt=""
-                  />
+                  <img class="buy-arrow" src="./icons/button-arrow.svg" alt="" />
                 </button>
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </component>
     <template v-if="!headerOnly">
-      <Direvatives :charts="charts"/>
+      <Direvatives :charts="charts" />
       <section class="section backers-partner">
         <div class="tw-container">
           <h2 class="title tw-mb-7.5">{{ t("backers.title") }}</h2>
@@ -157,7 +110,7 @@
               </div>
               <div class="card-partner ">
                 <a href="#">
-                  <img src="./img/backers/salad.png" alt="" width="344" height="96"/>
+                  <img src="./img/backers/salad.png" alt="" width="344" height="96" />
                 </a>
               </div>
             </div>
@@ -171,12 +124,12 @@
               </div>
               <div class="card-partner xl:tw-justify-self-center">
                 <a href="#">
-                  <img src="./img/backers/abc.png" alt="" width="179" height="28"/>
+                  <img src="./img/backers/abc.png" alt="" width="179" height="28" />
                 </a>
               </div>
               <div class="card-partner">
                 <a href="#">
-                  <img src="./img/backers/fakel.png" alt="" width="112" height="112"/>
+                  <img src="./img/backers/fakel.png" alt="" width="112" height="112" />
                 </a>
               </div>
             </div>
@@ -194,7 +147,7 @@
               </div>
               <div class="card-partner">
                 <a href="#">
-                  <img src="./img/backers/aot-konsalding.png" alt="" width="277" height="42"/>
+                  <img src="./img/backers/aot-konsalding.png" alt="" width="277" height="42" />
                 </a>
               </div>
             </div>
@@ -212,10 +165,7 @@
               </p>
               <br />
               <p class="tw-mb-7.5" v-html="t('about.text')"></p>
-              <button
-                class="button button_base button_green button_minw-md"
-                @click="$router.push({ name: 'about' })"
-              >
+              <button class="button button_base button_green button_minw-md" @click="$router.push({ name: 'about' })">
                 {{ t("about.button") }}
               </button>
             </div>
@@ -224,11 +174,7 @@
             </div>
           </div>
           <div class="card-big tw-mt-16 xl:tw-mt-10">
-            <img
-              :src="require('assets/icons/telegram-round.svg')"
-              alt="plus"
-              class="top-icon"
-            />
+            <img :src="require('assets/icons/telegram-round.svg')" alt="plus" class="top-icon" />
             <div class="card-big__left">
               <h2>{{ t("card-big.anyquestion.title") }}</h2>
               <p class="tw-mt-5">
@@ -236,21 +182,12 @@
               </p>
             </div>
 
-            <div
-              class="tw-flex tw-flex-col tw-mt-7.5 tw-gap-5 xl:tw-mt-0 xl:tw-flex-row xl:tw-gap-3"
-            >
-              <a
-                class="button button_base button_green"
-                href="https://t.me/algafinance_int"
-                target="blank"
-              >
+            <div class="tw-flex tw-flex-col tw-mt-7.5 tw-gap-5 xl:tw-mt-0 xl:tw-flex-row xl:tw-gap-3">
+              <a class="button button_base button_green" href="https://t.me/algafinance_int" target="blank">
                 {{ t("card-big.anyquestion.contacrusButton") }}
               </a>
-              <a
-                class="button button_base button_black button_minw-base"
-                href="https://t.me/algafinance"
-                target="blank"
-              >
+              <a class="button button_base button_black button_minw-base" href="https://t.me/algafinance"
+                target="blank">
                 {{ t("card-big.anyquestion.joinButton") }}
               </a>
             </div>
@@ -260,29 +197,18 @@
     </template>
   </div>
   <Teleport to="body">
-    <transition
-      appear
-      mode="out-in"
-      enter-active-class="animated slideInLeft"
-      leave-active-class="animated slideOutLeft"
-    >
+    <transition appear mode="out-in" enter-active-class="animated slideInLeft"
+      leave-active-class="animated slideOutLeft">
       <div class="dropdown tw-h-full" v-if="dropDown">
         <div class="tw-container tw-h-full">
-          <div
-            class="dropdown__wrapper tw-flex tw-justify-between tw-gap-1 tw-h-full"
-          >
+          <div class="dropdown__wrapper tw-flex tw-justify-between tw-gap-1 tw-h-full">
             <div class="dropdown__top tw-flex tw-justify-between tw-w-full">
-              <img
-                :src="require('assets/images/logo-v3.svg')"
-                alt="logo"
-                class="tw-cursor-pointer"
-                @click="
+              <img :src="require('assets/images/logo-v3.svg')" alt="logo" class="tw-cursor-pointer" @click="
                   () => {
                     $router.push({ name: 'home' });
                     dropDown = !dropDown;
                   }
-                "
-              />
+                " />
 
               <div class="tw-flex">
                 <q-btn flat round icon="close" @click="dropDown = !dropDown" />
@@ -292,12 +218,8 @@
               <button @click="$router.push({ name: 'about' })">
                 {{ t("header.nav[0]") }}
               </button>
-              <a
-                class="tw-text-white hover:tw-text-white"
-                href="https://t.me/algafinance_int"
-                target="_blank"
-                >{{ t("header.nav[1]") }}</a
-              >
+              <a class="tw-text-white hover:tw-text-white" href="https://t.me/algafinance_int" target="_blank">{{
+                t("header.nav[1]") }}</a>
             </div>
             <div class="dropdown__bottom">
               <Locale />
