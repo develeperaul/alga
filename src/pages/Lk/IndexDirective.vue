@@ -99,11 +99,8 @@
           {{ t("indexderivatives.title") }}
         </h2>
       </div>
-      <div class=" tw-grid xl:tw-hidden tw-overflow-hidden">
-
-        <div
-          class="tw-flex  xl:tw-gap-5 tw-gap-3 tw-mb-5 tw-overflow-auto "
-        >
+      <div class="tw-grid xl:tw-hidden tw-overflow-hidden">
+        <div class="tw-flex xl:tw-gap-5 tw-gap-3 tw-mb-5 tw-overflow-auto">
           <base-button
             v-for="item in typesDirevative"
             class="button button__dense"
@@ -394,11 +391,11 @@ import MarkIcon from "src/components/V3/MarkIcon.vue";
 import MiniAreaChart from "src/components/V3/MiniAreaChart.vue";
 import { useI18n } from "vue-i18n";
 import { useStore } from "vuex";
-import {useRoute} from "vue-router"
+import { useRoute } from "vue-router";
 import useChart from "src/composition/useChart.js";
 import useChartData from "src/composition/V3/useChartData.js";
 import useBuyWidthdrawalPopup from "src/composition/V3/useBuyWidthdrawalPopup";
-import IndexDetailedModal from 'src/components/LK/Modal/IndexDetailed.vue';
+import IndexDetailedModal from "src/components/LK/Modal/IndexDetailed.vue";
 
 const i18n = {
   messages: {
@@ -557,7 +554,6 @@ export default {
     IndexDetailedModal,
   },
   setup() {
-
     const slide = ref(1);
     const store = useStore();
     const { charts, getChart } = useChart();
@@ -579,7 +575,13 @@ export default {
       useBuyWidthdrawalPopup();
     const { t } = useI18n(i18n);
     const typeDirevative = ref("ALGA");
-    const typesDirevative = ["ALGA", "Market", "Fund", "KOL’s", "Partner Index"];
+    const typesDirevative = [
+      "ALGA",
+      "Market",
+      "Fund",
+      "KOL’s",
+      "Partner Index",
+    ];
     const derivatives = computed(() => {
       const arr = store.getters["landing/derivatives"];
       if (typeDirevative.value === "ALGA")
@@ -613,7 +615,9 @@ export default {
             item.id === 21 ||
             item.id === 22 ||
             item.id === 23 ||
-            item.id === 24
+            item.id === 24 ||
+            item.id === 26 ||
+            item.id === 27
           )
             return;
           return item;
@@ -626,12 +630,19 @@ export default {
 
       if (typeDirevative.value === "KOL’s")
         return arr.filter((item) => {
-          if (item.id === 21 || item.id === 22 || item.id === 24) return item;
+          if (
+            item.id === 21 ||
+            item.id === 22 ||
+            item.id === 24 ||
+            item.id === 26 ||
+            item.id === 27
+          )
+            return item;
         });
       if (typeDirevative.value === "Partner Index")
         return arr.filter((item) => {
           if (item.id === 23) return item;
-      });
+        });
     });
 
     watch(
