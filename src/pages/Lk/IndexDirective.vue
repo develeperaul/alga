@@ -617,7 +617,8 @@ export default {
             item.id === 23 ||
             item.id === 24 ||
             item.id === 26 ||
-            item.id === 27
+            item.id === 27 ||
+            item.id === 28
           )
             return;
           return item;
@@ -641,7 +642,7 @@ export default {
         });
       if (typeDirevative.value === "Partner Index")
         return arr.filter((item) => {
-          if (item.id === 23) return item;
+          if (item.id === 23 || item.id === 28) return item;
         });
     });
 
