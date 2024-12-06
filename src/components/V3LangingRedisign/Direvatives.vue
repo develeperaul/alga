@@ -906,7 +906,8 @@ export default {
             item.id === 24 ||
             item.id === 26 ||
             item.id === 27 ||
-            item.id === 28
+            item.id === 28 ||
+            item.id === 30
           )
             return;
           return item;
@@ -924,7 +925,8 @@ export default {
             item.id === 22 ||
             item.id === 24 ||
             item.id === 26 ||
-            item.id === 27
+            item.id === 27 ||
+            item.id === 30
           )
             return item;
         });

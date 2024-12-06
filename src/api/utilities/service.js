@@ -8,16 +8,14 @@ const api = new Service("http://alga.test", {
 
 export const testApi = new Service("", {
   apiPath: "api",
-  timeout: 10000,
+  timeout: 120000,
   tokenName: "b2c",
 });
 
 export const MainApi = new Service("https://admin.alga.finance", {
   apiPath: "api",
-  timeout: 10000,
+  timeout: 120000,
   tokenName: "b2c",
 });
-
-
 
 export default api;
